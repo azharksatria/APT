@@ -511,21 +511,17 @@ if($aksi=='delete_admin')
 	}
 
 //================== root LOGIN
-
 if($aksi=='user_login')
+{
+	$var=$query->cek_login($_POST['username'],md5($_POST['password']));
+	if($var)
 	{
-		$var=$query->user_login(
-		$_POST['username'],
-		md5($_POST['password'])
-		);
-		if($var)
-		{
-			header('location:../../user/');
-		}else{
-			header('location:../../index.php?notif');
+		header('location:../../user/');
+	}else{
+		header('location:../../index.php?notif');
 
-		}
 	}
+}
 
 //================== root READ
 

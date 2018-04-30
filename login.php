@@ -1,4 +1,8 @@
 <?php
+include'config/controller.php';
+if(isset($_SESSION['login_adminapt'])){
+  header("Location: index.php");
+}else{
 include'sweetalert/sweetalert.php';
 if(isset($_GET['error']))
 {
@@ -16,6 +20,8 @@ if(isset($_GET['error']))
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
     html{
+      /*background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+      background: -webkit-linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);*/
       background: linear-gradient(to bottom, #AAE7FF, #84DCFF);
       background: -webkit-linear-gradient(to bottom, #AAE7FF, #84DCFF);
       height: 100%
@@ -163,3 +169,4 @@ $(document).ready(function(){
 </script> -->
 </body>
 </html>
+<?php } ?>
