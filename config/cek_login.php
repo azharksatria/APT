@@ -3,10 +3,15 @@ session_start();
 
 class Koneksi
 {
-	var $host     ="localhost";
-	var $username ="root";
-	var $password ="password";
-	var $db       ="apt";
+	var $host     ="apt.uma.ac.id";
+	var $username ="aptumaac_user";
+	var $password ="passwordapt";
+	var $db       ="aptumaac_apt";
+
+	// var $host     ="localhost";
+	// var $username ="root";
+	// var $password ="password";
+	// var $db       ="apt";
 
 	public function  database()
 	{
@@ -20,16 +25,24 @@ class Koneksi
 		$query = $mysqli->query("SELECT * FROM admin WHERE username='$a' AND password='$b' ");
 		$data  = $query->fetch_array();
 		$cek   = $query->num_rows;
-		if($cek==1){
+		if($cek==1)
+    {
 			$_SESSION['login_adminapt']=$data['nama'];
 			$_SESSION['level_adminapt']=$data['level'];
-      	header('location:index2.php');
+      header('location:../index2.php');
+      // var_dump($cek);
 			return TRUE;
-		}else{
-      header('locaton:login.php');
+		}
+    else
+    {
+      echo "<script>window.location='../login.php?error'</script>";
+      // var_dump($cek);
 			return FALSE;
+
 		}
 	}
 }
+
+$query= new Koneksi();
 
 ?>
