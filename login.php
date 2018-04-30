@@ -9,6 +9,8 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
     html{
+      /*background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+      background: -webkit-linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);*/
       background: linear-gradient(to bottom, #AAE7FF, #84DCFF);
       background: -webkit-linear-gradient(to bottom, #AAE7FF, #84DCFF);
       height: 100%
@@ -54,7 +56,7 @@ padding : 77.5px 0;
     <div class="row" style="box-shadow: 0 0 20px 0 rgba(0,0,0,.2), 0 5px 5px 0 rgba(0,0,0,.24);">
         <div class="col-md-4 login-sec">
             <h2 class="text-center"><b style="color: #84DCFF;">Login</b> - APT</h2>
-            <form class="login-form" method="POST" action="cek_login.php">
+            <form id="form" class="login-form" method="POST">
               <div class="form-group">
                 
                 <input type="text" name="username" class="form-control" style="border-radius: 0; border: 0; background-color: #f2f2f2;" placeholder="Username" required>
@@ -106,7 +108,31 @@ padding : 77.5px 0;
 </section>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script type="text/javascript">
-    
-    </script>
-</body>
+       $(document).ready(function (a) {
+         $("#form").on('submit',(function(a) {
+           a.preventDefault();
+           $.ajax({
+             url: "root/proses.php?aksi=cek_login", // proses upload gambar
+             type: "POST", // metode untuk menjalankan form
+             data:  new FormData(this),
+             contentType: false,
+             cache: false,
+             processData:false,
+             
+             success: function(data){
+               if(data=='invalid file'){
+                 // invalid file format.
+                 //$("#pesan-error").html("").fadeIn();
+                 console.log(data);
+               }else{
+                  console.log(data);
+                //  // hasil upload gambar
+                // swal("Sukses","Berhasil login","success")
+                //  $("#form")[0].reset(); 
+               }
+             }          
+           });
+         }));
+       });
+    </script></body>
 </html>

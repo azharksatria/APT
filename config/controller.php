@@ -327,5 +327,11 @@ class Database
 
 //==================== Function LOGIN
 
+	public function cek_login($nik, $password)
+	{
+		$mysqli = $this->config->database();
+		$var = $mysqli->query("SELECT * From users WHERE nik='$nik' AND password ='$password'");
+		return $var;
+	}
 
 }
