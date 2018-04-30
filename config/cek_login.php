@@ -20,25 +20,24 @@ class Koneksi
 	}
 
 	public	function cek_login($a,$b)
-		{
+	{
 		$mysqli=$this->database();
 		$query = $mysqli->query("SELECT * FROM admin WHERE username='$a' AND password='$b' ");
 		$data  = $query->fetch_array();
 		$cek   = $query->num_rows;
 		if($cek==1)
-    {
+	    {
 			$_SESSION['login_adminapt']=$data['nama'];
 			$_SESSION['level_adminapt']=$data['level'];
-      header('location:../index2.php');
-      // var_dump($cek);
+	      	header('location:../index.php');
+	      // var_dump($cek);
 			return TRUE;
 		}
-    else
-    {
-      echo "<script>window.location='../login.php?error'</script>";
-      // var_dump($cek);
+	    else
+	    {
+      		echo "<script>window.location='../login.php?error'</script>";
+	      // var_dump($cek);
 			return FALSE;
-
 		}
 	}
 }

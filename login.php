@@ -1,4 +1,8 @@
 <?php
+include'config/controller.php';
+if(isset($_SESSION['login_adminapt'])){
+  header("Location: index.php");
+}else{
 include'sweetalert/sweetalert.php';
 if(isset($_GET['error']))
 {
@@ -165,3 +169,4 @@ $(document).ready(function(){
 </script> -->
 </body>
 </html>
+<?php } ?>

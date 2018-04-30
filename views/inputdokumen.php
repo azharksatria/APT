@@ -19,7 +19,8 @@
                                 echo 'Yayasan';
                         ?>
                     </u>
-                </p></div>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

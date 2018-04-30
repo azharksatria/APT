@@ -1,6 +1,9 @@
 <?php
-include'sweetalert/sweetalert.php';
 include'config/controller.php';
+if(!isset($_SESSION['login_adminapt'])){
+  header("Location: login.php");
+}else{
+include'sweetalert/sweetalert.php';
 include'root/notification.php';
 $query= new Database();
   // var_dump($berita);
@@ -12,7 +15,6 @@ $query= new Database();
   // var_dump($produk);
   // var_dump($edit_berita);
   //var_dump($lihat_pengaduan);
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -405,7 +407,7 @@ $query= new Database();
                     <img class="w-2r bdrs-50p" src="https://randomuser.me/api/portraits/men/10.jpg" alt="">
                   </div>
                   <div class="peer">
-                    <span class="fsz-sm c-grey-900">John Doe</span>
+                    <span class="fsz-sm c-grey-900"><?php echo $_SESSION['login_adminapt']; ?></span>
                   </div>
                 </a>
                 <ul class="dropdown-menu fsz-sm">
@@ -443,7 +445,7 @@ $query= new Database();
 
         <!-- ### $App Screen Footer ### -->
         <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
-          <span>Copyright © 2017 Designed by <a href="https://colorlib.com" target='_blank' title="Colorlib">Colorlib</a>. All rights reserved.</span>
+          <span>Copyright © 2018 Developed by <a href="http://pdai.uma.ac.id">PDAI</a> - Designed by Colorlib</a>. All rights reserved.</span>
         </footer>
       </div>
     </div>
@@ -451,3 +453,4 @@ $query= new Database();
     </script><script type="text/javascript" src="js/bundle.js"></script>
   </body>
 </html>
+<?php } ?>
