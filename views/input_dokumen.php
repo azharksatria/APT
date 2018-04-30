@@ -93,7 +93,7 @@
                         </label>
                     </div>
                     <div id="textboxes" style="display: none">
-                      <h3 class="box-title">File</h3>  <h7>[pdf & docx] </h7>
+                      <h3 class="box-title">File</h3>  <h10>pdf & docx </h10>
                       <input type="file" name="file">
                     </div>
 
@@ -106,10 +106,7 @@
 
                     <div id="textboxes1" style="display: none">
                       <h3 class="box-title">Rekomendasi</h3>
-                      <input type="text" name="rekomendasi">
-                      <textarea class="editor1">
-                        
-                      </textarea>
+                      <textarea class="form-control" rows="3"></textarea>
                     </div>
           </div>
 

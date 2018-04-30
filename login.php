@@ -1,3 +1,10 @@
+<?php
+include'sweetalert/sweetalert.php';
+if(isset($_GET['error']))
+{
+  echo "<script>swal('Opss..','Password atau Username Salah','error')</script>";
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,11 +48,11 @@ padding : 77.5px 0;
         window.alert = function(){};
         var defaultCSS = document.getElementById('bootstrap-css');
         function changeCSS(css){
-            if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />'); 
-            else $('head > link').filter(':first').replaceWith(defaultCSS); 
+            if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />');
+            else $('head > link').filter(':first').replaceWith(defaultCSS);
         }
         $( document ).ready(function() {
-          var iframe_height = parseInt($('html').height()); 
+          var iframe_height = parseInt($('html').height());
           window.parent.postMessage( iframe_height, 'https://bootsnipp.com');
         });
     </script>
@@ -56,21 +63,21 @@ padding : 77.5px 0;
     <div class="row" style="box-shadow: 0 0 20px 0 rgba(0,0,0,.2), 0 5px 5px 0 rgba(0,0,0,.24);">
         <div class="col-md-4 login-sec">
             <h2 class="text-center"><b style="color: #84DCFF;">Login</b> - APT</h2>
-            <form id="form" class="login-form" method="POST">
+            <form class="login-form" method="POST" action="root/proses_login.php?aksi=cek_login">
               <div class="form-group">
-                
-                <input type="text" name="username" class="form-control" style="border-radius: 0; border: 0; background-color: #f2f2f2;" placeholder="Username" required>
+
+                <input type="text" name="username" id="username" class="form-control" style="border-radius: 0; border: 0; background-color: #f2f2f2;" placeholder="Username" required>
               </div>
               <div class="form-group">
-                
-                <input type="password" name="password" class="form-control" style="border-radius: 0; border: 0; background-color: #f2f2f2;" placeholder="Password" required>
+
+                <input type="password" name="password" password="password" class="form-control" style="border-radius: 0; border: 0; background-color: #f2f2f2;" placeholder="Password" required>
               </div>
-              
-              
+
+
                 <div class="form-check" style="padding: 10px 0;">
-                <button type="submit" class="btn btn-login" style="width: 100%;border-radius:  0;background: #35E1D5; padding: 10px; letter-spacing: 1px; font-size: 14px;"><i class="fas fa-sign-in-alt"></i> LOGIN</button>
+                <button type="submit" name="submit" id="submit" class="btn btn-login" style="width: 100%;border-radius:  0;background: #35E1D5; padding: 10px; letter-spacing: 1px; font-size: 14px;"><i class="fas fa-sign-in-alt"></i> LOGIN</button>
               </div>
-              
+
             </form>
 <div class="copy-text">Created with <i class="fa fa-heart"></i> by <a href="http://pdai.uma.ac.id">PDAI - UMA</a></div>
         </div>
@@ -91,7 +98,7 @@ padding : 77.5px 0;
     <div class="carousel-item">
       <img class="d-block img-fluid" src="images/2.jpg" alt="First slide">
       <div class="carousel-caption d-none d-md-block">
- 
+
     </div>
     </div>
     <div class="carousel-item">
@@ -100,39 +107,61 @@ padding : 77.5px 0;
 
     </div>
   </div>
-            </div>     
-            
+            </div>
+
         </div>
     </div>
 </div>
 </section>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <script type="text/javascript">
-       $(document).ready(function (a) {
-         $("#form").on('submit',(function(a) {
-           a.preventDefault();
-           $.ajax({
-             url: "root/proses.php?aksi=cek_login", // proses upload gambar
-             type: "POST", // metode untuk menjalankan form
-             data:  new FormData(this),
-             contentType: false,
-             cache: false,
-             processData:false,
-             
-             success: function(data){
-               if(data=='invalid file'){
-                 // invalid file format.
-                 //$("#pesan-error").html("").fadeIn();
-                 console.log(data);
-               }else{
-                  console.log(data);
-                //  // hasil upload gambar
-                // swal("Sukses","Berhasil login","success")
-                //  $("#form")[0].reset(); 
-               }
-             }          
-           });
-         }));
-       });
-    </script></body>
+<!-- <script type="text/javascript">
+    $(document).ready(function (a) {
+    $(".login-form").on('submit',(function(a) {
+    a.preventDefault();
+    $.ajax({
+    url: "root/proses_login.php?aksi=cek_login",
+    type: "POST",
+    data:  new FormData(this),
+    contentType: false,
+    cache: false,
+    processData:false,
+
+    success: function(){
+
+  swal("berhasil","","success")
+    }
+    success: function(){
+
+  swal("berhasil","","success")
+    }
+    });
+    }));
+    });
+</script> -->
+<!-- <script>
+$(document).ready(function(){
+    $("#submit").click(function(){
+        var username = $("#username").val().trim();
+        var password = $("#password").val().trim();
+
+        if( username != "" && password != "" ){
+            $.ajax({
+                url:'root/proses_login.php?aksi=cek_login',
+                type:'post',
+                data:{username:username,password:password},
+                success:function(response){
+                    var msg = "";
+                    if(response == 1){
+                        window.location = "home.php";
+                    }else{
+                        msg = "Invalid username and password!";
+                    }
+                    $("#message").html(msg);
+                }
+            });
+        }
+    });
+});
+</script> -->
+</body>
 </html>
