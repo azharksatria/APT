@@ -138,27 +138,40 @@ $query= new Database();
           <!-- ### $Sidebar Menu ### -->
           <ul class="sidebar-menu scrollable pos-r">
             <li class="nav-item mT-30 active">
-              <a class="sidebar-link" href="index.html">
+              <a class="sidebar-link" id="dashboard" href="views/dashboard.php">
                 <span class="icon-holder">
-                  <i class="c-blue-500 ti-home"></i>
+                  <i class="c-brown-500 ti-home"></i>
                 </span>
                 <span class="title">Dashboard</span>
               </a>
             </li>
+
+            <li class="nav-item dropdown">
+              <a class="dropdown-toggle" href="javascript:void(0);">
+                <span class="icon-holder">
+                  <i class="c-blue-500 ti-share"></i>
+                </span>
+                <span class="title">Dokumen</span>
+                <span class="arrow">
+                  <i class="ti-angle-right"></i>
+                </span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class='sidebar-link' id="inputdokumen" href="views/input-dokumen.php">Input Dokumen</a>
+                </li>
+                <li>
+                  <a class='sidebar-link' id="listdokumen" href="views/list-dokumen.php">List Dokumen</a>
+                </li>
+              </ul>
+            </li>
+
             <li class="nav-item">
               <a class='sidebar-link' href="email.html">
                 <span class="icon-holder">
                   <i class="c-brown-500 ti-email"></i>
                 </span>
                 <span class="title">Email</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class='sidebar-link' href="compose.html">
-                <span class="icon-holder">
-                  <i class="c-blue-500 ti-share"></i>
-                </span>
-                <span class="title">Compose</span>
               </a>
             </li>
             <li class="nav-item">
@@ -217,87 +230,6 @@ $query= new Database();
                 </li>
                 <li>
                   <a class='sidebar-link' href="datatable.html">Data Table</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="dropdown-toggle" href="javascript:void(0);">
-                <span class="icon-holder">
-                    <i class="c-purple-500 ti-map"></i>
-                  </span>
-                <span class="title">Maps</span>
-                <span class="arrow">
-                    <i class="ti-angle-right"></i>
-                  </span>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="google-maps.html">Google Map</a>
-                </li>
-                <li>
-                  <a href="vector-maps.html">Vector Map</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="dropdown-toggle" href="javascript:void(0);">
-                <span class="icon-holder">
-                    <i class="c-red-500 ti-files"></i>
-                  </span>
-                <span class="title">Pages</span>
-                <span class="arrow">
-                    <i class="ti-angle-right"></i>
-                  </span>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class='sidebar-link' href="blank.html">Blank</a>
-                </li>                 
-                <li>
-                  <a class='sidebar-link' href="404.html">404</a>
-                </li>
-                <li>
-                  <a class='sidebar-link' href="500.html">500</a>
-                </li>
-                <li>
-                  <a class='sidebar-link' href="signin.html">Sign In</a>
-                </li>
-                <li>
-                  <a class='sidebar-link' href="signup.html">Sign Up</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="dropdown-toggle" href="javascript:void(0);">
-                <span class="icon-holder">
-                  <i class="c-teal-500 ti-view-list-alt"></i>
-                </span>
-                <span class="title">Multiple Levels</span>
-                <span class="arrow">
-                  <i class="ti-angle-right"></i>
-                </span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="nav-item dropdown">
-                  <a href="javascript:void(0);">
-                    <span>Menu Item</span>
-                  </a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a href="javascript:void(0);">
-                    <span>Menu Item</span>
-                    <span class="arrow">
-                      <i class="ti-angle-right"></i>
-                    </span>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="javascript:void(0);">Menu Item</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">Menu Item</a>
-                    </li>
-                  </ul>
                 </li>
               </ul>
             </li>
@@ -451,6 +383,35 @@ $query= new Database();
     </div>
     <script type="text/javascript" src="js/vendor.js">
     </script><script type="text/javascript" src="js/bundle.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+      $('#inputdokumen').on('click', function (evt) {
+          evt.preventDefault();
+          var link = evt.target,
+          span = $('<span>... processing ...</span>');
+          //$('#mainContent').replaceWith(span);
+          $('#mainContent').load(this.href);
+          //console.log(this.href);
+      });
+
+      $('#listdokumen').on('click', function (evt) {
+          evt.preventDefault();
+          var link = evt.target,
+          span = $('<span>... processing ...</span>');
+          //$('#mainContent').replaceWith(span);
+          $('#mainContent').load(this.href);
+          //console.log(this.href);
+      });
+
+      $('#dashboard').on('click', function (evt) {
+          evt.preventDefault();
+          var link = evt.target,
+          span = $('<span>... processing ...</span>');
+          //$('#mainContent').replaceWith(span);
+          $('#mainContent').load(this.href);
+          //console.log(this.href);
+      });
+    </script>
   </body>
 </html>
 <?php } ?>

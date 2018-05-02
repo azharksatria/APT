@@ -78,7 +78,7 @@ class Database
 	public function tampil_berita_full()
 	{
 		$mysqli=$this->config->database();
-		$data   =$mysqli->query("SELECT * FROM berita");
+		$data   =$mysqli->query("SELECT * FROM dokumen");
 		foreach ($data as $row) 
 		{
 			$var[]=$row;

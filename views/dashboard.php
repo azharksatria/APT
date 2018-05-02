@@ -1,7 +1,10 @@
+<?php
+    session_start();
+?>
 <div class="row gap-20 masonry pos-r" style="position: relative; height: 271px;">
     <div class="masonry-sizer col-md-6"></div>
     
-    <div class="masonry-item col-md-12" style="position: absolute; left: 0%; top: 124px;">
+    <div class="masonry-item col-md-12" style="position: absolute; left: 0%;">
         <div class="bd bgc-white">
             <div class="layers">
                 <div class="layer w-100 pX-20 pT-20">

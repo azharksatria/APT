@@ -6,10 +6,10 @@ session_start();
 
 class Koneksi 
 {
-	var $host     ="localhost";
-	var $username ="root";
-	var $password ="password";
-	var $db       ="apt";
+	var $host     ="apt.uma.ac.id";
+	var $username ="aptumaac_user";
+	var $password ="passwordapt";
+	var $db       ="aptumaac_apt";
 
 	public function  database()
 	{
