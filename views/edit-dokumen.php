@@ -1,20 +1,13 @@
 <?php
 include'../config/controller.php';
-// if(!isset($_SESSION['login_adminapt'])){
-//   header("Location: login.php");
-// }else{
 include'../sweetalert/sweetalert.php';
 include'../root/notification.php';
 $query= new Database();
-  // var_dump($berita);
-  // var_dump($slider);
-  // var_dump($pimpinan);
-  // var_dump($pengaduan);
-  // var_dump($edit_admin);
-  // var_dump($admin);
-  // var_dump($produk);
-  // var_dump($edit_berita);
-  //var_dump($lihat_pengaduan);
+
+if(isset($_GET['edit'])){
+  $id=$_GET['id'];
+  $row=$query->tampil_dokumen_where($id);
+}
 ?>
 <h5 class="c-grey-900 mT-10 mB-20"><i class="c-blue-500 ti-share"></i> Input Dokumen</h5>
 <div class="row gap-20 masonry pos-r">
@@ -32,7 +25,7 @@ $query= new Database();
                                            <div class="form-group col-md-6">
                                            <label for="inputState">Kriteria</label>
                                            <select id="inputState" name="kriteria" class="form-control">
-                                           <option selected="selected">- Pilih Kriteria Dokumen -</option>
+                                           <option value="<?php echo $row['kode_kriteria'];?>" selected="selected"><?php echo $row['kode_kriteria'];?></option>
                                            <?php
                                            for($i=1;$i<10;$i++){
                                            echo "
@@ -42,28 +35,28 @@ $query= new Database();
                                            </select>
                                            </div>
                                            <div class="form-group col-md-6">
-                                           <label for="inputPassword4">Nomor Dokumen</label><input type="text" class="form-control" id="inputPassword4" name="no_dokumen">
+                                           <label for="inputPassword4">Nomor Dokumen</label><input type="text" value="<?php echo $row['no_dokumen'];?>" class="form-control" id="inputPassword4" name="no_dokumen">
                                            </div>
                                            </div>
                                            <div class="form-group">
-                                           <label for="inputAddress">Nama Dokumen</label><input type="text" class="form-control" id="inputAddress" name="nama_dokumen">
-                                           </div>
+                                           <label for="inputAddress">Nama Dokumen</label><input type="text" value="<?php echo $row['nama_dokumen'];?>" class="form-control" id="inputAddress" name="nama_dokumen">
+                                         </div><input type="hidden" name="id_dokumen" value="<?php echo $row['id_dokumen'];?>">
 
                                            <div class="form-row">
                                            <div class="form-group col-md-4">
                                            <label for="inputAddress2">Status</label>
-                                           <div class="form-check" id="check1"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="gridRadios1" value="AL"> Ada dan Lengkap</label></div>
+                                           <div class="form-check" id="check1"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" <?php if($row['status']=='AL'){echo 'checked';} ?> id="gridRadios1" value="AL"> Ada dan Lengkap</label></div>
 
-                                           <div class="form-check" id="check2"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="gridRadios1" value="ATL"> Ada Tidak Lengkap</label></div>
+                                           <div class="form-check" id="check2"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" <?php if($row['status']=='ATL'){echo 'checked';} ?> id="gridRadios1" value="ATL"> Ada Tidak Lengkap</label></div>
 
-                                           <div class="form-check" id="check3"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="gridRadios1" value="ATD"> Ada Tidak Ditemukan</label></div>
+                                           <div class="form-check" id="check3"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" <?php if($row['status']=='ATD'){echo 'checked';} ?> id="gridRadios1" value="ATD"> Ada Tidak Ditemukan</label></div>
 
-                                           <div class="form-check" id="check4"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="gridRadios1" value="BA"> Belum Ada</label></div>
+                                           <div class="form-check" id="check4"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" <?php if($row['status']=='BA'){echo 'checked';} ?> id="gridRadios1" value="BA"> Belum Ada</label></div>
                                            </div>
                                            <div class="form-group col-md-8">
                                            <div id="rekomendasi">
                                            <label for="inputPassword4">Rekomendasi</label>
-                                           <textarea class="form-control" name="rekomendasi" style="margin-top: 0px; margin-bottom: 0px; height: 66px;"></textarea>
+                                           <textarea class="form-control" name="rekomendasi" style="margin-top: 0px; margin-bottom: 0px; height: 66px;"><?php echo $row['rekomendasi'];?></textarea>
                                            </div>
                                            <div id="berkas">
                                            <label for="inputPassword4">Upload Dokumen</label>
@@ -71,7 +64,7 @@ $query= new Database();
                                            </div>
                                            </div>
                                            </div>
-                                           <button type="submit" class="btn btn-primary">SIMPAN</button>
+                                           <button type="submit" class="btn btn-primary">UPDATE</button>
                        </form>
 
                 </div>
@@ -106,7 +99,7 @@ $query= new Database();
         $("#form").on('submit',(function(a) {
             a.preventDefault();
             $.ajax({
-                url: "root/proses.php?aksi=input_dokumen", // proses upload gambar
+                url: "../root/proses.php?aksi=update_dokumen", // proses upload gambar
                 type: "POST", // metode untuk menjalankan form
                 data:  new FormData(this),
                 contentType: false,
@@ -123,7 +116,7 @@ $query= new Database();
                     //     //swal("Sukses","Dokumen Berhasil di Input","success")
                     //     $("#form")[0].reset();
                     // }
-                    swal("Sukses","Dokumen Berhasil di Input","success");
+                    swal("Sukses","Dokumen Berhasil di Update","success");
                 },
                 error: function(data){
                   console.log(data.responseText);

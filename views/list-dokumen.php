@@ -19,7 +19,7 @@ $query= new Database();
 <h5 class="c-grey-900 mT-10 mB-20"><i class="c-red-500 ti-files"></i> List Dokumen</h5>
 <div class="row gap-20 masonry pos-r">
     <div class="masonry-sizer col-md-6"></div>
-    
+
     <div class="masonry-item col-md-12">
         <div class="bd bgc-white">
             <div class="layers">
@@ -34,23 +34,25 @@ $query= new Database();
                           <th>Kriteria Dokumen</th>
                           <th>Nomor Dokumen</th>
                           <th>Nama Dokumen</th>
+                          <th>Dokumen</th>
                           <th style="text-align: center;">Edit</th>
                           <th style="text-align: center;">Hapus</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php 
-                        $no=1; foreach ($query->tampil_berita_full() as $row) {?>
+                        <?php
+                        $no=1; foreach ($query->tampil_dokumen_full() as $row) {?>
                         <tr>
                           <td><?php echo $no++;?></td>
                           <td><?php echo $row['kode_kriteria'];?></td>
                           <td><?php echo $row['no_dokumen'];?></td>
                           <td><?php echo $row['nama_dokumen'];?></td>
+                          <td><?php echo $row['dokumen'];?></td>
                           <td align="center">
-                            <a href="root/proses.php?aksi=edit_berita&id=<?php echo $row['id_berita'];?> "><h3><li class="fa fa-edit"></li></h3></a>
+                            <a href="views/edit-dokumen.php?edit&id=<?php echo $row['id_dokumen'];?> "><h3><li class="fa fa-edit"></li></h3></a>
                           </td>
                           <td align="center">
-                            <a href="root/proses.php?aksi=delete_berita&id=<?php echo $row['id_berita'];?> "><h3><li class="fa fa-trash"></li></h3></a>
+                            <a href="root/proses.php?aksi=delete_dokumen&id=<?php echo $row['id_dokumen'];?> "><h3><li class="fa fa-trash"></li></h3></a>
                           </td>
                         </tr>
                         <?php } ?>
@@ -60,5 +62,5 @@ $query= new Database();
             </div>
         </div>
     </div>
-    
+
 </div>
