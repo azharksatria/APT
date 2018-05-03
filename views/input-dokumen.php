@@ -1,20 +1,9 @@
 <?php
 include'../config/controller.php';
-// if(!isset($_SESSION['login_adminapt'])){
-//   header("Location: login.php");
-// }else{
 include'../sweetalert/sweetalert.php';
 include'../root/notification.php';
 $query= new Database();
-  // var_dump($berita);
-  // var_dump($slider);
-  // var_dump($pimpinan);
-  // var_dump($pengaduan);
-  // var_dump($edit_admin);
-  // var_dump($admin);
-  // var_dump($produk);
-  // var_dump($edit_berita);
-  //var_dump($lihat_pengaduan);
+
 ?>
 <h5 class="c-grey-900 mT-10 mB-20"><i class="c-blue-500 ti-share"></i> Input Dokumen</h5>
 <div class="row gap-20 masonry pos-r">
@@ -67,7 +56,7 @@ $query= new Database();
                                            </div>
                                            <div id="berkas">
                                            <label for="inputPassword4">Upload Dokumen</label>
-                                           <input type="file" class="form-control" name="file">
+                                           <input type="file" class="form-control" accept=".doc,.pdf,.docx" name="file">
                                            </div>
                                            </div>
                                            </div>

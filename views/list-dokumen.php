@@ -55,7 +55,7 @@ $query= new Database();
                           <td><?php echo $row['kode_kriteria'];?></td>
                           <td><?php echo $row['no_dokumen'];?></td>
                           <td><?php echo $row['nama_dokumen'];?></td>
-                          <td><?php echo $row['dokumen'];?></td>
+                          <td><a target="_blank" href="views/view-dokumen.php?view&id=<?php echo $row['id_dokumen'];?>">VIEW</a></td>
                           <td><?php echo $row['rekomendasi'];?></td>
                           <td><?php echo $tanggal.'-'.$bulan.'-'.$tahun;?></td>
                           <td align="center">
