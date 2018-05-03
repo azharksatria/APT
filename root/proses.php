@@ -21,7 +21,7 @@ if($aksi=='input_dokumen')
 			$nama_file,
 			$_POST['status']
 			);
-			var_dump($var);
+			// var_dump($var);
 				if($var)
 				{
 					$_SESSION['dokumen']='Tambah';
@@ -29,7 +29,7 @@ if($aksi=='input_dokumen')
 				}
 				else
 				{
-					var_dump($upload);
+					// var_dump($upload);
 				echo '<script>swal("Gagal","Data Gagal di Input!","error")</script>';
 				header('location:../');
 				}
@@ -43,7 +43,7 @@ if($aksi=='input_dokumen')
 				$_POST['status'],
 				$_POST['rekomendasi']
 				);
-				var_dump($var);
+				// var_dump($var);
 					if($var)
 					{
 						$_SESSION['dokumen']='Tambah';
@@ -51,7 +51,7 @@ if($aksi=='input_dokumen')
 					}
 					else
 					{
-						var_dump($upload);
+						// var_dump($upload);
 					echo '<script>swal("Gagal","Data Gagal di Input!","error")</script>';
 					header('location:../');
 					}

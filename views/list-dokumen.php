@@ -57,6 +57,8 @@ $query= new Database();
                           <td><?php echo $row['nama_dokumen'];?></td>
                           <td><?php if($row['dokumen'] != null) echo $row['dokumen']; else echo "-"; ?></td>
                           <td><?php if($row['rekomendasi'] != null) echo $row['rekomendasi']; else echo "-"; ?></td>
+                          <td><a target="_blank" href="views/view-dokumen.php?view&id=<?php echo $row['id_dokumen'];?>">VIEW</a></td>
+                          <td><?php echo $row['rekomendasi'];?></td>
                           <td><?php echo $tanggal.'-'.$bulan.'-'.$tahun;?></td>
                           <td align="center">
                             <a id="edit" data-id="<?php echo $row['id_dokumen'];?>" href="#"><h3><li class="fa fa-edit"></li></h3></a>
