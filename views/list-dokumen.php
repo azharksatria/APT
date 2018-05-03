@@ -35,19 +35,29 @@ $query= new Database();
                           <th>Nomor Dokumen</th>
                           <th>Nama Dokumen</th>
                           <th>Dokumen</th>
+                          <th>Komentar</th>
+                          <th>Tanggal Upload</th>
                           <th style="text-align: center;">Edit</th>
                           <th style="text-align: center;">Hapus</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
-                        $no=1; foreach ($query->tampil_dokumen_full() as $row) {?>
+                        $no=1; foreach ($query->tampil_dokumen_full() as $row) {
+                          $data=$row['date'];
+                          $pecah   =explode('-', $data);
+                          $tahun   =$pecah[0];
+                          $bulan   =$pecah[1];
+                          $tanggal =substr($pecah[2],0,-8);
+                          ?>
                         <tr>
                           <td><?php echo $no++;?></td>
                           <td><?php echo $row['kode_kriteria'];?></td>
                           <td><?php echo $row['no_dokumen'];?></td>
                           <td><?php echo $row['nama_dokumen'];?></td>
                           <td><?php echo $row['dokumen'];?></td>
+                          <td><?php echo $row['rekomendasi'];?></td>
+                          <td><?php echo $tanggal.'-'.$bulan.'-'.$tahun;?></td>
                           <td align="center">
                             <a href="views/edit-dokumen.php?edit&id=<?php echo $row['id_dokumen'];?> "><h3><li class="fa fa-edit"></li></h3></a>
                           </td>
