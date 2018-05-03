@@ -55,11 +55,11 @@ $query= new Database();
                           <td><?php echo $row['kode_kriteria'];?></td>
                           <td><?php echo $row['no_dokumen'];?></td>
                           <td><?php echo $row['nama_dokumen'];?></td>
-                          <td><?php echo $row['dokumen'];?></td>
-                          <td><?php echo $row['rekomendasi'];?></td>
+                          <td><?php if($row['dokumen'] != null) echo $row['dokumen']; else echo "-"; ?></td>
+                          <td><?php if($row['rekomendasi'] != null) echo $row['rekomendasi']; else echo "-"; ?></td>
                           <td><?php echo $tanggal.'-'.$bulan.'-'.$tahun;?></td>
                           <td align="center">
-                            <a href="views/edit-dokumen.php?edit&id=<?php echo $row['id_dokumen'];?> "><h3><li class="fa fa-edit"></li></h3></a>
+                            <a id="edit" data-id="<?php echo $row['id_dokumen'];?>" href="#"><h3><li class="fa fa-edit"></li></h3></a>
                           </td>
                           <td align="center">
                             <a href="root/proses.php?aksi=delete_dokumen&id=<?php echo $row['id_dokumen'];?> "><h3><li class="fa fa-trash"></li></h3></a>
@@ -74,3 +74,15 @@ $query= new Database();
     </div>
 
 </div>
+
+<script type="text/javascript">
+      $('#edit').on('click', function (evt) {
+          evt.preventDefault();
+          var getLink = $(this).attr('data-id');
+          var link = evt.target,
+          span = $('<span>... processing ...</span>');
+          //$('#mainContent').replaceWith(span);
+          $('#mainContent').load("views/edit-dokumen.php?edit&id="+getLink);
+          console.log(getLink);
+      });
+</script>

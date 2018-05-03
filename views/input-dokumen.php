@@ -31,8 +31,8 @@ $query= new Database();
                          <div class="form-row">
                                            <div class="form-group col-md-6">
                                            <label for="inputState">Kriteria</label>
-                                           <select id="inputState" name="kriteria" class="form-control">
-                                           <option selected="selected">- Pilih Kriteria Dokumen -</option>
+                                           <select id="kriteria" name="kriteria" class="form-control" required>
+                                           <option value="" selected="selected">- Pilih Kriteria Dokumen -</option>
                                            <?php
                                            for($i=1;$i<10;$i++){
                                            echo "
@@ -42,36 +42,37 @@ $query= new Database();
                                            </select>
                                            </div>
                                            <div class="form-group col-md-6">
-                                           <label for="inputPassword4">Nomor Dokumen</label><input type="text" class="form-control" id="inputPassword4" name="no_dokumen">
+                                           <label for="inputPassword4">Nomor Dokumen</label><input type="text" class="form-control" id="nodokumen" name="no_dokumen" required>
                                            </div>
                                            </div>
                                            <div class="form-group">
-                                           <label for="inputAddress">Nama Dokumen</label><input type="text" class="form-control" id="inputAddress" name="nama_dokumen">
+                                           <label for="inputAddress">Nama Dokumen</label><input type="text" class="form-control" id="namadokumen" name="nama_dokumen" required>
                                            </div>
 
                                            <div class="form-row">
                                            <div class="form-group col-md-4">
                                            <label for="inputAddress2">Status</label>
-                                           <div class="form-check" id="check1"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="gridRadios1" value="AL"> Ada dan Lengkap</label></div>
+                                           <div class="form-check" id="check1"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="status" value="AL" required> Ada dan Lengkap</label></div>
 
-                                           <div class="form-check" id="check2"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="gridRadios1" value="ATL"> Ada Tidak Lengkap</label></div>
+                                           <div class="form-check" id="check2"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="status" value="ATL"> Ada Tidak Lengkap</label></div>
 
-                                           <div class="form-check" id="check3"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="gridRadios1" value="ATD"> Ada Tidak Ditemukan</label></div>
+                                           <div class="form-check" id="check3"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="status" value="ATD"> Ada Tidak Ditemukan</label></div>
 
-                                           <div class="form-check" id="check4"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="gridRadios1" value="BA"> Belum Ada</label></div>
+                                           <div class="form-check" id="check4"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="status" value="BA"> Belum Ada</label></div>
                                            </div>
                                            <div class="form-group col-md-8">
                                            <div id="rekomendasi">
                                            <label for="inputPassword4">Rekomendasi</label>
-                                           <textarea class="form-control" name="rekomendasi" style="margin-top: 0px; margin-bottom: 0px; height: 66px;"></textarea>
+                                           <textarea class="form-control" id="rekomendasitxt" name="rekomendasi" style="margin-top: 0px; margin-bottom: 0px; height: 66px;"></textarea>
                                            </div>
                                            <div id="berkas">
                                            <label for="inputPassword4">Upload Dokumen</label>
-                                           <input type="file" class="form-control" name="file">
+                                           <input type="file" id="berkastxt" class="form-control" name="file">
                                            </div>
                                            </div>
                                            </div>
                                            <button type="submit" class="btn btn-primary">SIMPAN</button>
+                                           <button type="button" id="btnreset" class="btn btn-danger">RESET</button>
                        </form>
 
                 </div>
@@ -89,20 +90,40 @@ $query= new Database();
         $('#check1').on('click', function () {
             $("#rekomendasi").hide();
             $("#berkas").show();
+            $("#berkastxt").attr("required", "required");
+            $("#rekomendasitxt").removeAttr("required");
+            $("#rekomendasitxt").val("");
         });
         $('#check2').on('click', function () {
             $("#rekomendasi").show();
             $("#berkas").hide();
+            $("#rekomendasitxt").attr("required", "required");
+            $("#berkastxt").removeAttr("required");
         });
         $('#check3').on('click', function () {
             $("#rekomendasi").show();
             $("#berkas").hide();
+            $("#rekomendasitxt").attr("required", "required");
+            $("#berkastxt").removeAttr("required");
         });
         $('#check4').on('click', function () {
             $("#rekomendasi").show();
             $("#berkas").hide();
+            $("#rekomendasitxt").attr("required", "required");
+            $("#berkastxt").removeAttr("required");
         });
 
+        //btnreset
+        $('#btnreset').on('click', function () {
+            $("#nodokumen").val("");
+            $("#namadokumen").val("");
+            $("#rekomendasitxt").val("");
+            $("#berkastxt").val("");
+            $("#kriteria").prop("selectedIndex", 0);
+            console.log('hi');
+        });
+
+        //formsubmit
         $("#form").on('submit',(function(a) {
             a.preventDefault();
             $.ajax({
@@ -124,6 +145,7 @@ $query= new Database();
                     //     $("#form")[0].reset();
                     // }
                     swal("Sukses","Dokumen Berhasil di Input","success");
+                    $('#mainContent').load('views/list-dokumen.php');
                 },
                 error: function(data){
                   console.log(data.responseText);

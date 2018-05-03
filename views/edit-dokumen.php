@@ -9,7 +9,7 @@ if(isset($_GET['edit'])){
   $row=$query->tampil_dokumen_where($id);
 }
 ?>
-<h5 class="c-grey-900 mT-10 mB-20"><i class="c-blue-500 ti-share"></i> Input Dokumen</h5>
+<h5 class="c-grey-900 mT-10 mB-20"><i class="c-blue-500 ti-share"></i> Edit Dokumen</h5>
 <div class="row gap-20 masonry pos-r">
     <div class="masonry-sizer col-md-6"></div>
 
@@ -17,7 +17,7 @@ if(isset($_GET['edit'])){
         <div class="bd bgc-white">
             <div class="layers">
                 <div class="layer w-100 pX-20 pT-20">
-                    <h6 class="lh-1" id="textup16">Input Dokumen</h6>
+                    <h6 class="lh-1" id="textup16">Edit Dokumen</h6>
                 </div>
                 <div class="layer bdT p-20 w-100">
                        <form id="form"  method="post" enctype="multipart/form-data">
@@ -99,7 +99,7 @@ if(isset($_GET['edit'])){
         $("#form").on('submit',(function(a) {
             a.preventDefault();
             $.ajax({
-                url: "../root/proses.php?aksi=update_dokumen", // proses upload gambar
+                url: "./root/proses.php?aksi=update_dokumen", // proses upload gambar
                 type: "POST", // metode untuk menjalankan form
                 data:  new FormData(this),
                 contentType: false,
@@ -117,6 +117,7 @@ if(isset($_GET['edit'])){
                     //     $("#form")[0].reset();
                     // }
                     swal("Sukses","Dokumen Berhasil di Update","success");
+                    $('#mainContent').load('views/list-dokumen.php');
                 },
                 error: function(data){
                   console.log(data.responseText);
