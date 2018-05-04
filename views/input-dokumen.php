@@ -20,13 +20,13 @@ $query= new Database();
                          <div class="form-row">
                                            <div class="form-group col-md-6">
                                            <label for="inputState">Kriteria</label>
-                                           <select id="kriteria" name="kriteria" class="form-control" required>
-                                           <option value="" selected="selected">- Pilih Kriteria Dokumen -</option>
+                                           <select id="kriteria" name="kriteria" class="form-control" required readonly="">
+                                           <option value="<?php echo $_SESSION['kriteria'];?>" selected="selected">Kriteria <?php echo $_SESSION['kriteria'];?></option>
                                            <?php
-                                           for($i=1;$i<10;$i++){
-                                           echo "
-                                           <option value='Kriteria $i'>Kriteria $i</option>";
-                                           }
+                                           // for($i=1;$i<10;$i++){
+                                           // echo "
+                                           // <option value='$i'>Kriteria $i</option>";
+                                           // }
                                            ?>
                                            </select>
                                            </div>

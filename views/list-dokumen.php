@@ -24,7 +24,7 @@ $query= new Database();
         <div class="bd bgc-white">
             <div class="layers">
                 <div class="layer w-100 pX-20 pT-20">
-                    <h6 class="lh-1" id="textup16">Input Dokumen</h6>
+                    <h6 class="lh-1" id="textup16">List Dokumen</h6>
                 </div>
                 <div class="layer bdT p-20 w-100">
                     <div id="dataTable_wrapper" class="dataTables_wrapper">
@@ -40,7 +40,14 @@ $query= new Database();
                           <th>Komentar</th>
                           <th>Tanggal Upload</th>
                           <th style="text-align: center;">Edit</th>
-                          <th style="text-align: center;">Hapus</th>
+                          <?php
+                          if($_SESSION['level_adminapt'] == '0')
+                          {
+                          ?> 
+                            <th style="text-align: center;">Hapus</th>
+                          <?php
+                          }
+                          ?>
                         </tr>
                         </thead>
                         <tbody>
@@ -54,7 +61,9 @@ $query= new Database();
                             ?>
                           <tr>
                             <td><?php echo $no++;?></td>
-                            <td><?php echo $row['kode_kriteria'];?></td>
+                            <td>
+                              <?php echo $query->kriteria($row['kode_kriteria']); ?>
+                            </td>
                             <td><?php echo $row['no_dokumen'];?></td>
                             <td><?php echo $row['nama_dokumen'];?></td>
                             <td>
@@ -71,9 +80,16 @@ $query= new Database();
                             <td align="center">
                               <a class="editdok" data-id="<?php echo $row['id_dokumen'];?>" href="javascript:void(0)"><h3><li class="fa fa-edit"></li></h3></a>
                             </td>
+                            <?php
+                            if($_SESSION['level_adminapt'] == '0')
+                            {
+                            ?>
                             <td align="center">
-                              <a class="deletedok" data-id="<?php echo $row['id_dokumen'];?>" href="javascript:void(0)"><h3><li class="fa fa-trash"></li></h3></a>
+                              <a class="deletedok" data-id="<?php echo $row['id_dokumen'];?>" href="javascript:void(0)" onclick="return confirm('Yakin Hapus Dokumen ?')"><h3><li class="fa fa-trash"></li></h3></a>
                             </td>
+                            <?php
+                            }
+                            ?>
                           </tr>
                           <?php } ?>
                         </tbody>

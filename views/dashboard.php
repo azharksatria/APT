@@ -11,7 +11,7 @@
                     <h6 class="lh-1" id="textup16">Dashboard</h6>
                 </div>
                 <div class="layer bdT p-20 w-100">
-                    <p>Selamat Datang <?php echo $_SESSION['login_adminapt']; ?> Kamu login sebagai 
+                    <p>Selamat Datang <?php echo $_SESSION['login_adminapt']; ?>, Kamu login sebagai 
                     <u>
                         <?php 
                             if($_SESSION['level_adminapt'] == '0')

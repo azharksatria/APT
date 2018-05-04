@@ -146,7 +146,7 @@ if($aksi=='update_dokumen')
 			{
 			$var= $query->update_dokumen_file(
 			$_POST['id_dokumen'],
-			$_POST['kriteria'],
+			$_SESSION['kriteria'],
 			$_POST['no_dokumen'],
 			$_POST['nama_dokumen'],
 			$nama_file,

@@ -24,6 +24,28 @@ class Database
 		var_dump($var);
 	}
 
+	public function kriteria($no)
+	{
+		if($no == '1')
+            return 'Kriteria 1';
+        elseif($no == '2')
+        	return 'Kriteria 2';
+        elseif($no == '3')
+        	return 'Kriteria 3';
+        elseif($no == '4')
+        	return 'Kriteria 4';
+        elseif($no == '5')
+        	return 'Kriteria 5';
+       	elseif($no == '6')
+        	return 'Kriteria 6';
+        elseif($no == '7')
+        	return 'Kriteria 7';
+        elseif($no == '8')
+        	return 'Kriteria 8';
+        else 
+        	return 'Kriteria 9';
+	}
+
 
 // =================== Function READ
 	public function tampil_dokumen_full()
@@ -290,7 +312,7 @@ public function update_dokumen($a,$b,$c,$d,$e,$f)
 		// 	return '0';
 		// else
 		// 	return '1';
-		return $var;
+		//return $var;
 	}
 
 	// public function delete_produk($id)

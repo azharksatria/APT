@@ -24,28 +24,28 @@ if(isset($_GET['edit'])){
                          <div class="form-row">
                                            <div class="form-group col-md-6">
                                            <label for="inputState">Kriteria</label>
-                                           <select id="inputState" name="kriteria" class="form-control">
-                                           <option value="<?php echo $row['kode_kriteria'];?>" selected="selected"><?php echo $row['kode_kriteria'];?></option>
+                                           <select id="kriteria" name="kriteria" class="form-control" required readonly="">
+                                           <option value="<?php echo $row['kode_kriteria'];?>" selected="selected">Kriteria <?php echo $row['kode_kriteria'];?></option>
                                            <?php
-                                           for($i=1;$i<10;$i++){
-                                           echo "
-                                           <option value='Kriteria $i'>Kriteria $i</option>";
-                                           }
+                                           // for($i=1;$i<10;$i++){
+                                           // echo "
+                                           // <option value='$i'>Kriteria $i</option>";
+                                           // }
                                            ?>
                                            </select>
                                            </div>
                                            <div class="form-group col-md-6">
-                                           <label for="inputPassword4">Nomor Dokumen</label><input type="text" value="<?php echo $row['no_dokumen'];?>" class="form-control" id="inputPassword4" name="no_dokumen">
+                                           <label for="inputPassword4">Nomor Dokumen</label><input type="text" value="<?php echo $row['no_dokumen'];?>" class="form-control" id="nodokumen" name="no_dokumen" required>
                                            </div>
                                            </div>
                                            <div class="form-group">
-                                           <label for="inputAddress">Nama Dokumen</label><input type="text" value="<?php echo $row['nama_dokumen'];?>" class="form-control" id="inputAddress" name="nama_dokumen">
-                                         </div><input type="hidden" name="id_dokumen" value="<?php echo $row['id_dokumen'];?>">
+                                           <label for="inputAddress">Nama Dokumen</label><input type="text" value="<?php echo $row['nama_dokumen'];?>" class="form-control" id="namadokumen" name="nama_dokumen">
+                                         </div><input type="hidden" name="id_dokumen" value="<?php echo $row['id_dokumen'];?>" required>
 
                                            <div class="form-row">
                                            <div class="form-group col-md-4">
                                            <label for="inputAddress2">Status</label>
-                                           <div class="form-check" id="check1"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" <?php if($row['status']=='AL'){echo 'checked';} ?> id="gridRadios1" value="AL"> Ada dan Lengkap</label></div>
+                                           <div class="form-check" id="check1"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" <?php if($row['status']=='AL'){echo 'checked';} ?> id="gridRadios1" value="AL" required> Ada dan Lengkap</label></div>
 
                                            <div class="form-check" id="check2"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" <?php if($row['status']=='ATL'){echo 'checked';} ?> id="gridRadios1" value="ATL"> Ada Tidak Lengkap</label></div>
 
@@ -56,11 +56,11 @@ if(isset($_GET['edit'])){
                                            <div class="form-group col-md-8">
                                            <div id="rekomendasi">
                                            <label for="inputPassword4">Rekomendasi</label>
-                                           <textarea class="form-control" name="rekomendasi" style="margin-top: 0px; margin-bottom: 0px; height: 66px;"><?php echo $row['rekomendasi'];?></textarea>
+                                           <textarea class="form-control" id="rekomendasitxt" name="rekomendasi" style="margin-top: 0px; margin-bottom: 0px; height: 66px;"><?php echo $row['rekomendasi'];?></textarea>
                                            </div>
                                            <div id="berkas">
                                            <label for="inputPassword4">Upload Dokumen</label>
-                                           <input type="file" class="form-control" name="file">
+                                           <input type="file" id="berkastxt" class="form-control" name="file">
                                            </div>
                                            </div>
                                            </div>
@@ -83,18 +83,27 @@ if(isset($_GET['edit'])){
         $('#check1').on('click', function () {
             $("#rekomendasi").hide();
             $("#berkas").show();
+            $("#berkastxt").attr("required", "required");
+            $("#rekomendasitxt").removeAttr("required");
+            $("#rekomendasitxt").val("");
         });
         $('#check2').on('click', function () {
             $("#rekomendasi").show();
             $("#berkas").hide();
+            $("#rekomendasitxt").attr("required", "required");
+            $("#berkastxt").removeAttr("required");
         });
         $('#check3').on('click', function () {
             $("#rekomendasi").show();
             $("#berkas").hide();
+            $("#rekomendasitxt").attr("required", "required");
+            $("#berkastxt").removeAttr("required");
         });
         $('#check4').on('click', function () {
             $("#rekomendasi").show();
             $("#berkas").hide();
+            $("#rekomendasitxt").attr("required", "required");
+            $("#berkastxt").removeAttr("required");
         });
 
         //btnreset
@@ -103,8 +112,6 @@ if(isset($_GET['edit'])){
             $("#namadokumen").val("");
             $("#rekomendasitxt").val("");
             $("#berkastxt").val("");
-            $("#kriteria").prop("selectedIndex", 0);
-            console.log('hi');
         });
 
         $("#form").on('submit',(function(a) {

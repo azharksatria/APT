@@ -158,9 +158,16 @@ $query= new Database();
                 </span>
               </a>
               <ul class="dropdown-menu">
-                <li>
-                  <a class='sidebar-link' id="inputdokumen" href="views/input-dokumen.php">Input Dokumen</a>
-                </li>
+                <?php
+                if($_SESSION['level_adminapt'] == '0')
+                {
+                ?> 
+                  <li>
+                    <a class='sidebar-link' id="inputdokumen" href="views/input-dokumen.php">Input Dokumen</a>
+                  </li>
+                <?php
+                }
+                ?>
                 <li>
                   <a class='sidebar-link' id="listdokumen" href="views/list-dokumen.php">List Dokumen</a>
                 </li>

@@ -29,6 +29,7 @@ class Koneksi
 	    {
 			$_SESSION['login_adminapt']=$data['nama'];
 			$_SESSION['level_adminapt']=$data['level'];
+			$_SESSION['kriteria']=$data['kriteria'];
 	      	header('location:../index.php');
 	      // var_dump($cek);
 			return TRUE;
