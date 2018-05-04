@@ -27,9 +27,7 @@ $query= new Database();
                     <h6 class="lh-1" id="textup16">List Dokumen</h6>
                 </div>
                 <div class="layer bdT p-20 w-100">
-                    <div id="dataTable_wrapper" class="dataTables_wrapper">
-                      <table id="dataTable" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info"
-                            style="width: 100%;">
+                    <table id="example5" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                           <th style="width: 30px;">No.</th>
@@ -39,6 +37,8 @@ $query= new Database();
                           <th>Dokumen</th>
                           <th>Komentar</th>
                           <th>Tanggal Upload</th>
+                          <th>Status</th>
+                          <th>Koreksi</th>
                           <th style="text-align: center;">Edit</th>
                           <?php
                           if($_SESSION['level_adminapt'] == '0')
@@ -51,32 +51,34 @@ $query= new Database();
                         </tr>
                         </thead>
                         <tbody>
-                          <?php
-                          $no=1; foreach ($query->tampil_dokumen_full() as $row) {
-                            $data=$row['date'];
-                            $pecah   =explode('-', $data);
-                            $tahun   =$pecah[0];
-                            $bulan   =$pecah[1];
-                            $tanggal =substr($pecah[2],0,-8);
+                        <?php
+                        $no=1; foreach ($query->tampil_dokumen_full() as $row) {
+                          $data=$row['date'];
+                          $pecah   =explode('-', $data);
+                          $tahun   =$pecah[0];
+                          $bulan   =$pecah[1];
+                          $tanggal =substr($pecah[2],0,-8);
+                          ?>
+                        <tr>
+                          <td><?php echo $no++;?></td>
+                          <td><?php echo $row['kode_kriteria'];?></td>
+                          <td><?php echo $row['no_dokumen'];?></td>
+                          <td><?php echo $row['nama_dokumen'];?></td>
+                          <td>
+                            <?php
+                              if($row['dokumen'] != null){
+                                echo "<a target='_blank' href='views/view-dokumen.php?view&id=$row[id_dokumen]'>VIEW</a>";
+                              }else{
+                                echo "-";
+                              };
                             ?>
-                          <tr>
-                            <td><?php echo $no++;?></td>
-                            <td>
-                              <?php echo $query->kriteria($row['kode_kriteria']); ?>
-                            </td>
-                            <td><?php echo $row['no_dokumen'];?></td>
-                            <td><?php echo $row['nama_dokumen'];?></td>
-                            <td>
-                              <?php
-                                if($row['dokumen'] != null){ 
-                                  echo "<a target='_blank' href='views/view-dokumen.php?view&id=$row[id_dokumen]'><i class='c-red-500 ti-files'></i> View</a>";
-                                }else{
-                                  echo "-";
-                                };
-                              ?>
-                            </td>
+
                             <td><?php if($row['rekomendasi'] != null) echo $row['rekomendasi']; else echo "-"; ?></td>
                             <td><?php echo $tanggal.'-'.$bulan.'-'.$tahun;?></td>
+                            <td><?php echo $row['status'];?></td>
+                            <td align="center">
+                              <a class="koreksi" data-id="<?php echo $row['id_dokumen'];?>" no-dokumen="<?php echo $row['id_dokumen'];?>" href="#"><h3><li class="fa fa-edit"></li></h3></a>
+                            </td>
                             <td align="center">
                               <a class="editdok" data-id="<?php echo $row['id_dokumen'];?>" href="javascript:void(0)"><h3><li class="fa fa-edit"></li></h3></a>
                             </td>
@@ -94,7 +96,6 @@ $query= new Database();
                           <?php } ?>
                         </tbody>
                       </table>
-                    </div>
                 </div>
             </div>
         </div>
@@ -103,37 +104,22 @@ $query= new Database();
 </div>
 
 <script type="text/javascript">
-    $('.editdok').on('click', function (evt) {
-        evt.preventDefault();
-        var getLink = $(this).attr('data-id');
-        span = $('<span>... processing ...</span>');
-        $('#mainContent').load("views/edit-dokumen.php?edit&id="+getLink);
-        console.log(getLink);
-    });
-
-    $('.deletedok').on('click', function (evt) {
+      $('.editdok').on('click', function (evt) {
           evt.preventDefault();
-          var id = $(this).attr('data-id');
-          var getUrl = "root/proses.php?aksi=delete_dokumen&id="+id;
-          $.ajax({
-            type: "GET",
-            dataType: 'json',
-            url : getUrl,
-            success: function(data){
-              console.log(data);
-              //swal("Sukses","Dokumen Berhasil di Hapus","success");
-              //$('#mainContent').load('views/list-dokumen.php');
-            },
-            error: function(data){
-              //console.log(data.responseText);     
-              // console.log('error');
-              // console.log(data.responseText);
-              swal("Sukses","Dokumen Berhasil di Hapus","success");
-              $('#mainContent').load('views/list-dokumen.php');
-            }
-          });
+          var getLink = $(this).attr('data-id');
+          var link = evt.target,
+          span = $('<span>... processing ...</span>');
           //$('#mainContent').replaceWith(span);
-          
-          //console.log(this.href);
+          $('#mainContent').load("views/edit-dokumen.php?edit&id="+getLink);
+          console.log(getLink);
+      });
+      $('.koreksi').on('click', function (evt) {
+          evt.preventDefault();
+          var getLink = $(this).attr('data-id');
+          var link = evt.target,
+          span = $('<span>... processing ...</span>');
+          //$('#mainContent').replaceWith(span);
+          $('#mainContent').load("views/koreksi-dokumen.php?koreksi&id="+getLink);
+          console.log(getLink);
       });
 </script>
