@@ -65,6 +65,7 @@ if($aksi=='koreksi_dokumen')
 			if($upload)
 			{
 			$var= $query->koreksi_dokumen_file(
+			$_POST['kriteria'],
 			$_POST['no_dokumen'],
 			$_POST['perbaikan'],
 			$nama_file,
@@ -86,6 +87,7 @@ if($aksi=='koreksi_dokumen')
 			else
 			{
 				$var= $query->koreksi_dokumen(
+					$_POST['kriteria'],
 					$_POST['no_dokumen'],
 					$_POST['perbaikan'],
 					$_POST['progres']

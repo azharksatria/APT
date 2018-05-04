@@ -38,12 +38,14 @@ $query= new Database();
                           <th>Komentar</th>
                           <th>Tanggal Upload</th>
                           <th>Status</th>
+                          <?php if($_SESSION['level_adminapt'] != '0'){?>
                           <th>Koreksi</th>
+                          <?php } ?>
                           <th style="text-align: center;">Edit</th>
                           <?php
                           if($_SESSION['level_adminapt'] == '0')
                           {
-                          ?> 
+                          ?>
                             <th style="text-align: center;">Hapus</th>
                           <?php
                           }
@@ -76,9 +78,11 @@ $query= new Database();
                             <td><?php if($row['rekomendasi'] != null) echo $row['rekomendasi']; else echo "-"; ?></td>
                             <td><?php echo $tanggal.'-'.$bulan.'-'.$tahun;?></td>
                             <td><?php echo $row['status'];?></td>
+                            <?php if($_SESSION['level_adminapt'] != '0'){?>
                             <td align="center">
-                              <a class="koreksi" data-id="<?php echo $row['id_dokumen'];?>" no-dokumen="<?php echo $row['id_dokumen'];?>" href="#"><h3><li class="fa fa-edit"></li></h3></a>
+                              <a class="koreksi" data-id="<?php echo $row['id_dokumen'];?>" no-dokumen="<?php echo $row['no_dokumen'];?>" href="#"><h3><i class="ti-comment-alt"></i></h3></a>
                             </td>
+                            <?php } ?>
                             <td align="center">
                               <a class="editdok" data-id="<?php echo $row['id_dokumen'];?>" href="javascript:void(0)"><h3><li class="fa fa-edit"></li></h3></a>
                             </td>
@@ -116,10 +120,11 @@ $query= new Database();
       $('.koreksi').on('click', function (evt) {
           evt.preventDefault();
           var getLink = $(this).attr('data-id');
+          var getDok = $(this).attr('no-dokumen');
           var link = evt.target,
           span = $('<span>... processing ...</span>');
           //$('#mainContent').replaceWith(span);
-          $('#mainContent').load("views/koreksi-dokumen.php?koreksi&id="+getLink);
+          $('#mainContent').load("views/koreksi-dokumen.php?koreksi&id="+getLink+"&no_dokumen="+getDok);
           console.log(getLink);
       });
 </script>

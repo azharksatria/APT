@@ -22,18 +22,18 @@ class Database
 		return $var;
 	}
 
-	public function koreksi_dokumen_file($a,$b,$c,$d)
+	public function koreksi_dokumen_file($a,$b,$c,$d,$e)
 	{
 		$mysqli=$this->config->database();
-		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b','$c','$d',NOW())");
+		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b','$c','$d','$e',NOW())");
 		return $var;
 		var_dump($var);
 	}
 
-	public function koreksi_dokumen($a,$b,$c)
+	public function koreksi_dokumen($a,$b,$c,$d)
 	{
 		$mysqli=$this->config->database();
-		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b',NULL,'$c',NOW())");
+		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b','$c',NULL,'$d',NOW())");
 		return $var;
 		var_dump($var);
 	}
@@ -56,7 +56,7 @@ class Database
         	return 'Kriteria 7';
         elseif($no == '8')
         	return 'Kriteria 8';
-        else 
+        else
         	return 'Kriteria 9';
 	}
 
@@ -65,7 +65,7 @@ class Database
 	public function tampil_dokumen_full()
 	{
 		$mysqli=$this->config->database();
-		$data   =$mysqli->query("SELECT * FROM dokumen");
+		$data   =$mysqli->query("SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ");
 		foreach ($data as $row)
 		{
 			$var[]=$row;
@@ -93,8 +93,10 @@ class Database
 	{
 		$mysqli =$this->config->database();
 		$data   =$mysqli->query("SELECT * FROM history WHERE no_dokumen='$id' ");
-		$var  =$data->fetch_array();
-		return $var;
+	foreach ($data as $row) {
+		$var[]=$row;
+	}
+	return $var;
 	}
 
 	// public function tampil_berita()

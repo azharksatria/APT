@@ -41,10 +41,13 @@ if(isset($_GET['koreksi'])){
                                            </select>
                                            </div> -->
                                            <div class="form-group col-md-6">
-                                           <label for="inputPassword4">Nomor Dokumen</label><input readonly="readonly" type="text" name="no_dokumen" value="<?php echo $row['no_dokumen'];?>" class="form-control">
+                                           <label for="inputPassword4">Nomor Dokumen</label>
+                                           <input readonly="readonly" type="text" name="no_dokumen" value="<?php echo $row['no_dokumen'];?>" class="form-control">
+                                           <input  type="text" name="kriteria" value="<?php echo $row['kode_kriteria'];?>" class="form-control">
                                            </div>
                                            <div class="form-group col-md-6">
-                                           <label for="inputPassword4">Tanggal Pengisian</label><input readonly="readonly" type="text" value="<?php echo $tanggal.'-'.$bulan.'-'.$tahun;?>" class="form-control">
+                                           <label for="inputPassword4">Tanggal Pengisian</label>
+                                           <input readonly="readonly" type="text" value="<?php echo $tanggal.'-'.$bulan.'-'.$tahun;?>" class="form-control">
                                            </div>
 
                                            <div class="form-group col-md-6">
@@ -61,13 +64,14 @@ if(isset($_GET['koreksi'])){
                                            </div>
                                            <div class="form-group col-md-6">
                                            <label for="inputPassword4">History</label>
-                                           <?php foreach ($query->history($dokumen) as $data) {
-                                             echo $data['progres'];
-                                           }?>
+                                              <p style="border: 1px solid #ced4da;border-radius:5px;padding:10px;">
+                                             <?php $no='1'; foreach ($query->history($dokumen) as $data)
+                                             { echo $no++.'. '.$data['progres'].'<br>';}?>
+                                           </p>
                                            </div>
                                            <div class="form-group col-md-6">
                                            <label for="inputPassword4">Progres</label>
-                                           <input type="text" class="form-control" name="progres">
+                                           <input type="text" required class="form-control" name="progres">
                                            </div>
                                            </div>
 
