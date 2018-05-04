@@ -22,18 +22,18 @@ class Database
 		return $var;
 	}
 
-	public function koreksi_dokumen_file($a,$b,$c,$d,$e)
+	public function koreksi_dokumen_file($a,$b,$c,$d,$e,$f)
 	{
 		$mysqli=$this->config->database();
-		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b','$c','$d','$e',NOW())");
+		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b','$c','$d','$e','$f',NOW())");
 		return $var;
 		var_dump($var);
 	}
 
-	public function koreksi_dokumen($a,$b,$c,$d)
+	public function koreksi_dokumen($a,$b,$c,$d,$e)
 	{
 		$mysqli=$this->config->database();
-		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b','$c',NULL,'$d',NOW())");
+		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b','$c',NULL,'$d','$e',NOW())");
 		return $var;
 		var_dump($var);
 	}
@@ -64,8 +64,16 @@ class Database
 // =================== Function READ
 	public function tampil_dokumen_full()
 	{
+		if($_SESSION['level_adminapt']!='0')
+		{
+			$where="SELECT * FROM dokumen ";
+		}
+		else
+		{
+			$where="SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ";
+		}
 		$mysqli=$this->config->database();
-		$data   =$mysqli->query("SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ");
+		$data   =$mysqli->query("$where");
 		foreach ($data as $row)
 		{
 			$var[]=$row;
@@ -93,6 +101,16 @@ class Database
 	{
 		$mysqli =$this->config->database();
 		$data   =$mysqli->query("SELECT * FROM history WHERE no_dokumen='$id' ");
+	foreach ($data as $row) {
+		$var[]=$row;
+	}
+	return $var;
+	}
+
+	public function notification($id)
+	{
+		$mysqli =$this->config->database();
+		$data   =$mysqli->query("SELECT * FROM history WHERE kriteria='$id' ");
 	foreach ($data as $row) {
 		$var[]=$row;
 	}

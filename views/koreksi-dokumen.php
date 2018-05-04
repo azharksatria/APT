@@ -44,6 +44,7 @@ if(isset($_GET['koreksi'])){
                                            <label for="inputPassword4">Nomor Dokumen</label>
                                            <input readonly="readonly" type="text" name="no_dokumen" value="<?php echo $row['no_dokumen'];?>" class="form-control">
                                            <input  type="text" name="kriteria" value="<?php echo $row['kode_kriteria'];?>" class="form-control">
+                                           <input  type="text" name="nama" value="<?php echo $_SESSION['login_adminapt'];?>" class="form-control">
                                            </div>
                                            <div class="form-group col-md-6">
                                            <label for="inputPassword4">Tanggal Pengisian</label>

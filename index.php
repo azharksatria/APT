@@ -161,7 +161,7 @@ $query= new Database();
                 <?php
                 if($_SESSION['level_adminapt'] == '0')
                 {
-                ?> 
+                ?>
                   <li>
                     <a class='sidebar-link' id="inputdokumen" href="views/input-dokumen.php">Input Dokumen</a>
                   </li>
@@ -268,6 +268,7 @@ $query= new Database();
               </li>
             </ul>
             <ul class="nav-right">
+              <?php if($_SESSION['level_adminapt']==0){?>
               <li class="notifications dropdown">
                 <span class="counter bgc-red">3</span>
                 <a href="" class="dropdown-toggle no-after" data-toggle="dropdown">
@@ -279,6 +280,9 @@ $query= new Database();
                     <i class="ti-bell pR-10"></i>
                     <span class="fsz-sm fw-600 c-grey-900">Notifications</span>
                   </li>
+                  <?php
+                      $id=$_SESSION['kriteria'];
+                      foreach ($query->notification($id) as $row) {?>
                   <li>
                     <ul class="ovY-a pos-r scrollable lis-n p-0 m-0 fsz-sm">
                       <li>
@@ -288,7 +292,9 @@ $query= new Database();
                           </div>
                           <div class="peer peer-greed">
                             <span>
-                              <span class="fw-500">John Doe</span>
+
+                                <span class="fw-500"><?php echo $row['nama'];?></span>
+
                               <span class="c-grey-600">liked your <span class="text-dark">post</span>
                               </span>
                             </span>
@@ -298,50 +304,18 @@ $query= new Database();
                           </div>
                         </a>
                       </li>
-                      <li>
-                        <a href="" class='peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100'>
-                          <div class="peer mR-15">
-                            <img class="w-3r bdrs-50p" src="https://randomuser.me/api/portraits/men/2.jpg" alt="">
-                          </div>
-                          <div class="peer peer-greed">
-                            <span>
-                              <span class="fw-500">Moo Doe</span>
-                              <span class="c-grey-600">liked your <span class="text-dark">cover image</span>
-                              </span>
-                            </span>
-                            <p class="m-0">
-                              <small class="fsz-xs">7 mins ago</small>
-                            </p>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="" class='peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100'>
-                          <div class="peer mR-15">
-                            <img class="w-3r bdrs-50p" src="https://randomuser.me/api/portraits/men/3.jpg" alt="">
-                          </div>
-                          <div class="peer peer-greed">
-                            <span>
-                              <span class="fw-500">Lee Doe</span>
-                              <span class="c-grey-600">commented on your <span class="text-dark">video</span>
-                              </span>
-                            </span>
-                            <p class="m-0">
-                              <small class="fsz-xs">10 mins ago</small>
-                            </p>
-                          </div>
-                        </a>
-                      </li>
+
                     </ul>
                   </li>
-                  <li class="pX-20 pY-15 ta-c bdT">
+                  <?php } ?>
+                  <!-- <li class="pX-20 pY-15 ta-c bdT">
                     <span>
                       <a href="" class="c-grey-600 cH-blue fsz-sm td-n">View All Notifications <i class="ti-angle-right fsz-xs mL-10"></i></a>
                     </span>
-                  </li>
+                  </li> -->
                 </ul>
               </li>
-
+            <?php } ?>
               <li class="dropdown">
                 <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                   <div class="peer mR-10">
@@ -390,19 +364,19 @@ $query= new Database();
         </footer>
       </div>
     </div>
-    
+
     <script type="text/javascript" src="js/vendor.js">
     </script><script type="text/javascript" src="js/bundle.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
+
     <script type="text/javascript">
       $(document).ready( function (){
         $('#dataTable').DataTable();
       });
     </script>
-    
+
     <script type="text/javascript">
       $('#inputdokumen').on('click', function (evt) {
           evt.preventDefault();

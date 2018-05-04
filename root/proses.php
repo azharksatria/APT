@@ -69,7 +69,8 @@ if($aksi=='koreksi_dokumen')
 			$_POST['no_dokumen'],
 			$_POST['perbaikan'],
 			$nama_file,
-			$_POST['progres']
+			$_POST['progres'],
+			$_POST['nama']
 			);
 			// var_dump($var);
 				if($var)
@@ -90,7 +91,8 @@ if($aksi=='koreksi_dokumen')
 					$_POST['kriteria'],
 					$_POST['no_dokumen'],
 					$_POST['perbaikan'],
-					$_POST['progres']
+					$_POST['progres'],
+					$_POST['nama']
 				);
 				// var_dump($var);
 					if($var)
