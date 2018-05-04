@@ -25,7 +25,7 @@ $query= new Database();
                                            <?php
                                            for($i=1;$i<10;$i++){
                                            echo "
-                                           <option value=$i>Kriteria $i</option>";
+                                           <option value='Kriteria $i'>Kriteria $i</option>";
                                            }
                                            ?>
                                            </select>
@@ -125,14 +125,6 @@ $query= new Database();
 
                 success: function(data){
                     console.log(data);
-                    // if(data=='invalid file'){
-                    //     // invalid file format.
-                    //     $("#pesan-error").html("Format gambar tidak valid").fadeIn();
-                    // }else{
-                    //     // hasil upload gambar
-                    //     //swal("Sukses","Dokumen Berhasil di Input","success")
-                    //     $("#form")[0].reset();
-                    // }
                     swal("Sukses","Dokumen Berhasil di Input","success");
                     $('#mainContent').load('views/list-dokumen.php');
                 },

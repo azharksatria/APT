@@ -3,7 +3,7 @@ include'config/controller.php';
 if(!isset($_SESSION['login_adminapt'])){
   header("Location: login.php");
 }else{
-include'sweetalert/sweetalert.php';
+//include'sweetalert/sweetalert.php';
 include'root/notification.php';
 $query= new Database();
   // var_dump($berita);
@@ -23,6 +23,7 @@ $query= new Database();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>APT UMA - Dashboard</title>
     <link href="css/style.css" rel="stylesheet">
+    <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
     <style>
       #loader {
         transition: all 0.3s ease-in-out;
@@ -382,9 +383,19 @@ $query= new Database();
         </footer>
       </div>
     </div>
+    
     <script type="text/javascript" src="js/vendor.js">
     </script><script type="text/javascript" src="js/bundle.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script type="text/javascript">
+      $(document).ready( function (){
+        $('#dataTable').DataTable();
+      });
+    </script>
+    
     <script type="text/javascript">
       $('#inputdokumen').on('click', function (evt) {
           evt.preventDefault();

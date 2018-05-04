@@ -286,6 +286,10 @@ public function update_dokumen($a,$b,$c,$d,$e,$f)
 	{
 		$mysqli=$this->config->database();
 		$var   =$mysqli->query("DELETE FROM dokumen WHERE id_dokumen='$id' ");
+		// if($var)
+		// 	return '0';
+		// else
+		// 	return '1';
 		return $var;
 	}
 

@@ -484,19 +484,23 @@ if($aksi=='update_dokumen')
 // ================== root DELETE
 if($aksi=='delete_dokumen')
 	{
-		$var =$query->delete_dokumen(
-		$id  =$_GET['id']
-		);
-			if($var)
-			{
-				$_SESSION['dokumen']='Hapus';
-				header('location:../');
-			}
-			else
-			{
-				echo '<script>swal("Gagal","Data Gagal di Hapus!","error")</script>';
-				header('location:../');
-			}
+		$var =$query->delete_dokumen($_GET['id']);
+		if(isset($var)) {
+		   return "YES";
+		} else {
+		   return "NO";
+		}
+		// return 'sukses';
+		// 	if($var)
+		// 	{
+		// 		// $_SESSION['dokumen']='Hapus';
+		// 		// header('location:../');
+		// 	}
+		// 	else
+		// 	{
+		// 		// echo '<script>swal("Gagal","Data Gagal di Hapus!","error")</script>';
+		// 		// header('location:../');
+		// 	}
 	}
 
 	// if($aksi=='delete_produk')

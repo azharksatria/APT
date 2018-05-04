@@ -29,7 +29,7 @@ if(isset($_GET['edit'])){
                                            <?php
                                            for($i=1;$i<10;$i++){
                                            echo "
-                                           <option value=$i>Kriteria $i</option>";
+                                           <option value='Kriteria $i'>Kriteria $i</option>";
                                            }
                                            ?>
                                            </select>
@@ -65,6 +65,7 @@ if(isset($_GET['edit'])){
                                            </div>
                                            </div>
                                            <button type="submit" class="btn btn-primary">UPDATE</button>
+                                           <button type="button" id="btnreset" class="btn btn-danger">RESET</button>
                        </form>
 
                 </div>
@@ -94,6 +95,16 @@ if(isset($_GET['edit'])){
         $('#check4').on('click', function () {
             $("#rekomendasi").show();
             $("#berkas").hide();
+        });
+
+        //btnreset
+        $('#btnreset').on('click', function () {
+            $("#nodokumen").val("");
+            $("#namadokumen").val("");
+            $("#rekomendasitxt").val("");
+            $("#berkastxt").val("");
+            $("#kriteria").prop("selectedIndex", 0);
+            console.log('hi');
         });
 
         $("#form").on('submit',(function(a) {
