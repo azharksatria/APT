@@ -23,6 +23,7 @@ $query= new Database();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>APT UMA - Dashboard</title>
     <link href="css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="http://www.uma.ac.id/asset/images/favicon.png" />
     <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
     <style>
       #loader {

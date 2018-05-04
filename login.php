@@ -16,6 +16,7 @@ if(isset($_GET['error']))
     <meta name="robots" content="noindex, nofollow">
 
     <title>APT UMA - Universitas Medan Area</title>
+    <link rel="shortcut icon" href="http://www.uma.ac.id/asset/images/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
