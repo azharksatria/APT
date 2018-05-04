@@ -57,6 +57,53 @@ if($aksi=='input_dokumen')
 					}
 			}
 }
+if($aksi=='koreksi_dokumen')
+{
+			$folder    ="dokumen/koreksi/";
+			$nama_file = $folder.basename($_FILES['file']['name']);
+			$upload =move_uploaded_file($_FILES['file']['tmp_name'], $nama_file);
+			if($upload)
+			{
+			$var= $query->koreksi_dokumen_file(
+			$_POST['no_dokumen'],
+			$_POST['perbaikan'],
+			$nama_file,
+			$_POST['progres']
+			);
+			// var_dump($var);
+				if($var)
+				{
+					$_SESSION['dokumen']='Koreksi';
+					header('location:../');
+				}
+				else
+				{
+					// var_dump($upload);
+				echo '<script>swal("Gagal","Data Gagal di Koreksi!","error")</script>';
+				header('location:../');
+				}
+			}
+			else
+			{
+				$var= $query->koreksi_dokumen(
+					$_POST['no_dokumen'],
+					$_POST['perbaikan'],
+					$_POST['progres']
+				);
+				// var_dump($var);
+					if($var)
+					{
+						$_SESSION['dokumen']='Koreksi';
+						header('location:../');
+					}
+					else
+					{
+						// var_dump($upload);
+					echo '<script>swal("Gagal","Data Gagal di Koreksi!","error")</script>';
+					header('location:../');
+					}
+			}
+}
 //
 // if($aksi=='input_produk')
 // {

@@ -13,13 +13,27 @@ class Database
 		$mysqli=$this->config->database();
 		$var=$mysqli->query("INSERT INTO dokumen  VALUES(NULL,'$a','$b','$c','$d',NOW(),'$e',NULL,NULL)");
 		return $var;
-		var_dump($var);
 	}
 
 	public function input_dokumen($a,$b,$c,$d,$e)
 	{
 		$mysqli=$this->config->database();
 		$var=$mysqli->query("INSERT INTO dokumen  VALUES(NULL,'$a','$b','$c','',NOW(),'$d','$e',NULL)");
+		return $var;
+	}
+
+	public function koreksi_dokumen_file($a,$b,$c,$d)
+	{
+		$mysqli=$this->config->database();
+		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b','$c','$d',NOW())");
+		return $var;
+		var_dump($var);
+	}
+
+	public function koreksi_dokumen($a,$b,$c)
+	{
+		$mysqli=$this->config->database();
+		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b',NULL,'$c',NOW())");
 		return $var;
 		var_dump($var);
 	}
@@ -44,14 +58,23 @@ class Database
 		$var=$data->fetch_array();
 		return $var;
 	}
-	// public function tampil_pimpinan()
-	// {
-	// 	$mysqli =$this->config->database();
-	// 	$data   =$mysqli->query("SELECT * FROM pimpinan");
-	// 	$var  =$data->fetch_array();
-	// 	return $var;
-	// }
-	//
+
+	public function koreksi_dokumen_where($a)
+	{
+		$mysqli=$this->config->database();
+		$data   =$mysqli->query("SELECT * FROM dokumen WHERE id_dokumen='$a' ");
+		$var=$data->fetch_array();
+		return $var;
+	}
+
+	public function history($id)
+	{
+		$mysqli =$this->config->database();
+		$data   =$mysqli->query("SELECT * FROM history WHERE no_dokumen='$id' ");
+		$var  =$data->fetch_array();
+		return $var;
+	}
+
 	// public function tampil_berita()
 	// {
 	// 	$mysqli=$this->config->database();
