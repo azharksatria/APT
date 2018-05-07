@@ -8,7 +8,7 @@ if(isset($_GET['koreksi'])){
   $id=$_GET['id'];
   $dokumen=$_GET['no_dokumen'];
   $row=$query->koreksi_dokumen_where($id);
-  $data=$row['date'];
+  $data=$row['tanggal_upload'];
   $pecah   =explode('-', $data);
   $tahun   =$pecah[0];
   $bulan   =$pecah[1];
@@ -45,6 +45,7 @@ if(isset($_GET['koreksi'])){
                                            <input readonly="readonly" type="text" name="no_dokumen" value="<?php echo $row['no_dokumen'];?>" class="form-control">
                                            <input  type="hidden" name="kriteria" value="<?php echo $row['kode_kriteria'];?>" class="form-control">
                                            <input  type="hidden" name="nama" value="<?php echo $_SESSION['login_adminapt'];?>" class="form-control">
+                                           <input  type="hidden" name="id" value="<?php echo $id;?>" class="form-control">
                                            </div>
                                            <div class="form-group col-md-6">
                                            <label for="inputPassword4">Tanggal Pengisian</label>
@@ -72,7 +73,7 @@ if(isset($_GET['koreksi'])){
                                            </div>
                                            <div class="form-group col-md-6">
                                            <label for="inputPassword4">Progres</label>
-                                           <input type="text" required class="form-control" name="progres">
+                                           <input type="number" max="100" required class="form-control" name="progres">
                                            </div>
                                            </div>
 
@@ -116,14 +117,6 @@ if(isset($_GET['koreksi'])){
 
                 success: function(data){
                     console.log(data);
-                    // if(data=='invalid file'){
-                    //     // invalid file format.
-                    //     $("#pesan-error").html("Format gambar tidak valid").fadeIn();
-                    // }else{
-                    //     // hasil upload gambar
-                    //     //swal("Sukses","Dokumen Berhasil di Input","success")
-                    //     $("#form")[0].reset();
-                    // }
                     swal("Sukses","Dokumen Berhasil di Update","success");
                     $('#mainContent').load('views/list-dokumen.php');
                 },

@@ -6,15 +6,7 @@ include'../config/controller.php';
 include'../sweetalert/sweetalert.php';
 include'../root/notification.php';
 $query= new Database();
-  // var_dump($berita);
-  // var_dump($slider);
-  // var_dump($pimpinan);
-  // var_dump($pengaduan);
-  // var_dump($edit_admin);
-  // var_dump($admin);
-  // var_dump($produk);
-  // var_dump($edit_berita);
-  //var_dump($lihat_pengaduan);
+
 ?>
 <h5 class="c-grey-900 mT-10 mB-20"><i class="c-red-500 ti-files"></i> List Dokumen</h5>
 <div class="row gap-20 masonry pos-r">
@@ -27,6 +19,18 @@ $query= new Database();
                     <h6 class="lh-1" id="textup16">List Dokumen</h6>
                 </div>
                 <div class="layer bdT p-20 w-100">
+                  <?php if($_SESSION['level_adminapt'] !='0'){?>
+                      <form id="form" style="width:120px" method="post">
+                      <select class="form-control select2" name="kriteria" onchange="this.form.submit();">
+                      <option>Pilih Kriteria</option>
+                      <?php $y=9; for ($x=1; $x<=$y; $x++) 
+                      { 
+                        echo "<option value=".$x.">Kreteria ".$x." </option>";
+                       } ?>
+                      </select>
+                      </form>
+                      <br>
+                      <?php } ?>
                     <table id="example5" class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -34,12 +38,12 @@ $query= new Database();
                           <th>Kriteria Dokumen</th>
                           <th>Nomor Dokumen</th>
                           <th>Nama Dokumen</th>
-                          <th>Dokumen</th>
-                          <th>Komentar</th>
+                         <!--  <th>Dokumen</th> -->
+                          <th>Keterangan</th>
                           <th>Tanggal Upload</th>
                           <th>Status</th>
                           <?php if($_SESSION['level_adminapt'] != '0'){?>
-                          <th>Koreksi</th>
+                          <th>Progres</th>
                           <?php } ?>
                           <?php if($_SESSION['level_adminapt'] == '0' || $_SESSION['level_adminapt'] == '1'){?>
                           <th style="text-align: center;">Edit</th>
@@ -57,7 +61,7 @@ $query= new Database();
                         <tbody>
                         <?php
                         $no=1; foreach ($query->tampil_dokumen_full() as $row) {
-                          $data=$row['date'];
+                          $data=$row['tanggal_upload'];
                           $pecah   =explode('-', $data);
                           $tahun   =$pecah[0];
                           $bulan   =$pecah[1];
@@ -65,7 +69,7 @@ $query= new Database();
                           ?>
                         <tr>
                           <td><?php echo $no++;?></td>
-                          <td><?php echo $row['kode_kriteria'];?></td>
+                          <td>Kriteria <?php echo $row['kode_kriteria'];?></td>
                           <td><?php echo $row['no_dokumen'];?></td>
                           <td><?php echo $row['nama_dokumen'];?></td>
                           <td>
@@ -76,7 +80,7 @@ $query= new Database();
                                 echo "-";
                               };
                             ?>
-
+                            </td>
                             <td><?php if($row['rekomendasi'] != null) echo $row['rekomendasi']; else echo "-"; ?></td>
                             <td><?php echo $tanggal.'-'.$bulan.'-'.$tahun;?></td>
                             <td><?php echo $row['status'];?></td>
@@ -131,4 +135,24 @@ $query= new Database();
           $('#mainContent').load("views/koreksi-dokumen.php?koreksi&id="+getLink+"&no_dokumen="+getDok);
           console.log(getLink);
       });
+              //formsubmit
+        $("#form").on('change',(function(a) {
+            a.preventDefault();
+            $.ajax({
+                url: "root/proses.php?aksi=kriteria", // proses upload gambar
+                type: "POST", // metode untuk menjalankan form
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+
+                success: function(data){
+                    console.log(data);
+                    $('#mainContent').load('views/list-dokumen.php');
+                },
+                error: function(data){
+                  console.log(data.responseText);
+                }
+            });
+        }));
 </script>
