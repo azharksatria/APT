@@ -64,11 +64,15 @@ class Database
 // =================== Function READ
 	public function tampil_dokumen_full()
 	{
-		if($_SESSION['level_adminapt']!='0')
+		if($_SESSION['level_adminapt']=='1')
 		{
 			$where="SELECT * FROM dokumen ";
 		}
-		else
+		if($_SESSION['level_adminapt']=='2')
+		{
+			$where="SELECT * FROM dokumen ";
+		}
+		if($_SESSION['level_adminapt']=='3' || $_SESSION['level_adminapt']=='0')		
 		{
 			$where="SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ";
 		}

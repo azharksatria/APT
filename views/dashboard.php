@@ -17,9 +17,11 @@
                             if($_SESSION['level_adminapt'] == '0')
                                 echo 'Sekretariat';
                             else if($_SESSION['level_adminapt'] == '1')
-                                echo 'Koordinator';
+                                echo 'Super Admin'; 
+                            else if($_SESSION['level_adminapt'] == '2')
+                                echo 'Koordinator Pelaksana';
                             else
-                                echo 'Yayasan';
+                                echo 'Koordinator Kriteria'.' '.$_SESSION['kriteria'];
                         ?>
                     </u>
                 </p></div>

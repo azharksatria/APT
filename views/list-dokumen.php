@@ -41,7 +41,9 @@ $query= new Database();
                           <?php if($_SESSION['level_adminapt'] != '0'){?>
                           <th>Koreksi</th>
                           <?php } ?>
+                          <?php if($_SESSION['level_adminapt'] == '0' || $_SESSION['level_adminapt'] == '1'){?>
                           <th style="text-align: center;">Edit</th>
+                          <?php } ?>
                           <?php
                           if($_SESSION['level_adminapt'] == '0')
                           {
@@ -83,9 +85,11 @@ $query= new Database();
                               <a class="koreksi" data-id="<?php echo $row['id_dokumen'];?>" no-dokumen="<?php echo $row['no_dokumen'];?>" href="#"><h3><i class="ti-comment-alt"></i></h3></a>
                             </td>
                             <?php } ?>
+                           <?php if($_SESSION['level_adminapt'] == '0' || $_SESSION['level_adminapt'] == '1'){?>
                             <td align="center">
                               <a class="editdok" data-id="<?php echo $row['id_dokumen'];?>" href="javascript:void(0)"><h3><li class="fa fa-edit"></li></h3></a>
                             </td>
+                            <?php } ?>
                             <?php
                             if($_SESSION['level_adminapt'] == '0')
                             {

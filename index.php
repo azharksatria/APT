@@ -176,7 +176,7 @@ $query= new Database();
               </ul>
             </li>
 
-            <li class="nav-item">
+<!--             <li class="nav-item">
               <a class='sidebar-link' href="email.html">
                 <span class="icon-holder">
                   <i class="c-brown-500 ti-email"></i>
@@ -242,7 +242,7 @@ $query= new Database();
                   <a class='sidebar-link' href="datatable.html">Data Table</a>
                 </li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
