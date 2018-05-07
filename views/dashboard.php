@@ -11,17 +11,17 @@
                     <h6 class="lh-1" id="textup16">Dashboard</h6>
                 </div>
                 <div class="layer bdT p-20 w-100">
-                    <p>Selamat Datang <?php echo $_SESSION['login_adminapt']; ?>, Kamu login sebagai 
+                    <p>Selamat Datang Website APT UMA<!-- <?php echo $_SESSION['login_adminapt']; ?> -->, Kamu login sebagai 
                     <u>
                         <?php 
                             if($_SESSION['level_adminapt'] == '0')
-                                echo 'Sekretariat';
+                                echo 'Sekretariat '.$_SESSION['kriteria'];
                             else if($_SESSION['level_adminapt'] == '1')
-                                echo 'Super Admin'; 
+                                echo 'Ketua'; 
                             else if($_SESSION['level_adminapt'] == '2')
-                                echo 'Koordinator Pelaksana';
+                                echo $_SESSION['login_adminapt'];
                             else
-                                echo 'Koordinator Kriteria'.' '.$_SESSION['kriteria'];
+                                echo 'Koordinator Kriteria '.$_SESSION['login_adminapt'];
                         ?>
                     </u>
                 </p></div>

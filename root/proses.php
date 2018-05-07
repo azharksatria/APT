@@ -1,6 +1,5 @@
 <?php
 include'../config/controller.php';
-include'../sweetalert/sweetalert.php';
 $query= new Database();
 
 $aksi=$_GET['aksi'];
@@ -106,6 +105,12 @@ if($aksi=='koreksi_dokumen')
 					echo '<script>swal("Gagal","Data Gagal di Koreksi!","error")</script>';
 					header('location:../');
 					}
+			}
+			if($_POST['progres']=='100'){
+				$var= $query->update_status(
+					$status='AL',
+					$_POST['id']
+				);
 			}
 }
 //
@@ -654,12 +659,9 @@ if($aksi=='user_login')
 
 //================== root READ
 
-if($aksi=='lihat_pengaduan')
+if($aksi=='kriteria')
 	{
-		$_SESSION['id_pengaduan']=$_GET['id'];
-		$_SESSION['lihat_pengaduan']='active';
-		//var_dump($id);exit();
 
-				header('location:../');
-
+		$_SESSION['kriteria']=$_POST['kriteria'];
+		header('location:../');
 	}

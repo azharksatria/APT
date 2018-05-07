@@ -11,14 +11,14 @@ class Database
 	public function input_dokumen_file($a,$b,$c,$d,$e)
 	{
 		$mysqli=$this->config->database();
-		$var=$mysqli->query("INSERT INTO dokumen  VALUES(NULL,'$a','$b','$c','$d',NOW(),'$e',NULL,NULL)");
+		$var=$mysqli->query("INSERT INTO dokumen (kode_kriteria,no_dokumen,nama_dokumen,dokumen,tanggal_upload,status)  VALUES('$a','$b','$c','$d',NOW(),'$e')");
 		return $var;
 	}
 
 	public function input_dokumen($a,$b,$c,$d,$e)
 	{
 		$mysqli=$this->config->database();
-		$var=$mysqli->query("INSERT INTO dokumen  VALUES(NULL,'$a','$b','$c','',NOW(),'$d','$e',NULL)");
+		$var=$mysqli->query("INSERT INTO dokumen (kode_kriteria,no_dokumen,nama_dokumen,tanggal_upload,status,rekomendasi) VALUES('$a','$b','$c',NOW(),'$d','$e')");
 		return $var;
 	}
 
@@ -66,16 +66,16 @@ class Database
 	{
 		if($_SESSION['level_adminapt']=='1')
 		{
-			$where="SELECT * FROM dokumen ";
+			$where="SELECT * FROM dokumen ORDER BY kode_kriteria ASC";
 		}
-		if($_SESSION['level_adminapt']=='2')
-		{
-			$where="SELECT * FROM dokumen ";
-		}
-		if($_SESSION['level_adminapt']=='3' || $_SESSION['level_adminapt']=='0')		
+		if($_SESSION['level_adminapt']=='2' || $_SESSION['level_adminapt']=='0')
 		{
 			$where="SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ";
 		}
+		// if($_SESSION['level_adminapt']=='3' || $_SESSION['level_adminapt']=='0')		
+		// {
+		// 	$where="SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ";
+		// }
 		$mysqli=$this->config->database();
 		$data   =$mysqli->query("$where");
 		foreach ($data as $row)
@@ -256,6 +256,14 @@ public function update_dokumen($a,$b,$c,$d,$e,$f)
 	$mysqli=$this->config->database();
 	$var=$mysqli->query("UPDATE dokumen SET kode_kriteria='$b',no_dokumen='$c',nama_dokumen='$d',status='$e',
 		rekomendasi='$f',updated=NOW() WHERE id_dokumen='$a' ");
+	return $var;
+	var_dump($var);
+}
+
+public function update_status($a,$b)
+{
+	$mysqli=$this->config->database();
+	$var=$mysqli->query("UPDATE dokumen SET status='$a',updated=NOW() WHERE id_dokumen='$b' ");
 	return $var;
 	var_dump($var);
 }

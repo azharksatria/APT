@@ -6,15 +6,6 @@ if(!isset($_SESSION['login_adminapt'])){
 //include'sweetalert/sweetalert.php';
 include'root/notification.php';
 $query= new Database();
-  // var_dump($berita);
-  // var_dump($slider);
-  // var_dump($pimpinan);
-  // var_dump($pengaduan);
-  // var_dump($edit_admin);
-  // var_dump($admin);
-  // var_dump($produk);
-  // var_dump($edit_berita);
-  //var_dump($lihat_pengaduan);
 ?>
 <!DOCTYPE html>
 <html>
