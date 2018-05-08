@@ -18,7 +18,8 @@ if($aksi=='input_dokumen')
 			$_POST['no_dokumen'],
 			$_POST['nama_dokumen'],
 			$nama_file,
-			$_POST['status']
+			$_POST['status'],
+			$_POST['progres']
 			);
 			// var_dump($var);
 				if($var)
@@ -40,7 +41,8 @@ if($aksi=='input_dokumen')
 				$_POST['no_dokumen'],
 				$_POST['nama_dokumen'],
 				$_POST['status'],
-				$_POST['rekomendasi']
+				$_POST['rekomendasi'],
+				$_POST['progres']
 				);
 				// var_dump($var);
 					if($var)
@@ -106,10 +108,13 @@ if($aksi=='koreksi_dokumen')
 					header('location:../');
 					}
 			}
-			if($_POST['progres']=='100'){
+			if($_POST['progres']=='100')
+			{
 				$var= $query->update_status(
 					$status='AL',
-					$_POST['id']
+					$_POST['id'],
+					$nama_file
+
 				);
 			}
 }

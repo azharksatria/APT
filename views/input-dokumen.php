@@ -33,10 +33,17 @@ $query= new Database();
                                            <div class="form-group col-md-6">
                                            <label for="inputPassword4">Nomor Dokumen</label><input type="text" class="form-control" id="nodokumen" name="no_dokumen" required>
                                            </div>
+
+                                           <div class="form-group col-md-6">
+                                           <label for="inputState">Nama Dokumen</label>
+                                           <input type="text" class="form-control" id="namadokumen" name="nama_dokumen" required>
                                            </div>
-                                           <div class="form-group">
-                                           <label for="inputAddress">Nama Dokumen</label><input type="text" class="form-control" id="namadokumen" name="nama_dokumen" required>
+                                           <div class="form-group col-md-6">
+                                           <label for="inputPassword4">Progres</label>
+                                           <input type="number" max="100" class="form-control" id="progres" name="progres" required>
                                            </div>
+                                           </div>
+
 
                                            <div class="form-row">
                                            <div class="form-group col-md-4">
@@ -128,7 +135,7 @@ $query= new Database();
                     swal("Sukses","Dokumen Berhasil di Input","success");
                     $('#mainContent').load('views/list-dokumen.php');
                 },
-                error: function(data){
+                error  : function(data){
                   console.log(data.responseText);
                 }
             });

@@ -16,12 +16,12 @@ if(isset($_GET['view']))
 <head>
 	<title></title>
 		<style type="text/css">
-	html, body{
-  height: 100%;
-}.view{
-   height: 100%; 
-}
-	</style>
+		html, body{
+		height: 100%;
+		}.view{
+		height: 100%; 
+		}
+		</style>
 </head>
 <body>
     <div class="view">

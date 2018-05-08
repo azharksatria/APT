@@ -64,20 +64,20 @@ class Database
 // =================== Function READ
 	public function tampil_dokumen_full()
 	{
-		if($_SESSION['level_adminapt']=='1')
-		{
-			$where="SELECT * FROM dokumen ORDER BY kode_kriteria ASC";
-		}
-		if($_SESSION['level_adminapt']=='2' || $_SESSION['level_adminapt']=='0')
-		{
-			$where="SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ";
-		}
-		// if($_SESSION['level_adminapt']=='3' || $_SESSION['level_adminapt']=='0')		
+		// if($_SESSION['level_adminapt']=='1')
+		// {
+		// 	$where="SELECT * FROM dokumen ORDER BY kode_kriteria ASC";
+		// }
+		// if($_SESSION['level_adminapt']=='2' || $_SESSION['level_adminapt']=='0')
+		// {
+		// 	$where="SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ";
+		// }
+		// if($_SESSION['level_adminapt']=='3' || $_SESSION['level_adminapt']=='0')
 		// {
 		// 	$where="SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ";
 		// }
 		$mysqli=$this->config->database();
-		$data   =$mysqli->query("$where");
+		$data   =$mysqli->query("SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ");
 		foreach ($data as $row)
 		{
 			$var[]=$row;
@@ -260,10 +260,10 @@ public function update_dokumen($a,$b,$c,$d,$e,$f)
 	var_dump($var);
 }
 
-public function update_status($a,$b)
+public function update_status($a,$b,$c)
 {
 	$mysqli=$this->config->database();
-	$var=$mysqli->query("UPDATE dokumen SET status='$a',updated=NOW() WHERE id_dokumen='$b' ");
+	$var=$mysqli->query("UPDATE dokumen SET status='$a',dokumen='$c',updated=NOW() WHERE id_dokumen='$b' ");
 	return $var;
 	var_dump($var);
 }

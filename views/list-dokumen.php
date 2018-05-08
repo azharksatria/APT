@@ -23,8 +23,8 @@ $query= new Database();
                       <form id="form" style="width:120px" method="post">
                       <select class="form-control select2" name="kriteria" onchange="this.form.submit();">
                       <option>Pilih Kriteria</option>
-                      <?php $y=9; for ($x=1; $x<=$y; $x++) 
-                      { 
+                      <?php $y=9; for ($x=1; $x<=$y; $x++)
+                      {
                         echo "<option value=".$x.">Kreteria ".$x." </option>";
                        } ?>
                       </select>
@@ -38,13 +38,12 @@ $query= new Database();
                           <th>Kriteria Dokumen</th>
                           <th>Nomor Dokumen</th>
                           <th>Nama Dokumen</th>
-                         <!--  <th>Dokumen</th> -->
+                          <th>Dokumen</th>
                           <th>Keterangan</th>
                           <th>Tanggal Upload</th>
                           <th>Status</th>
-                          <?php if($_SESSION['level_adminapt'] != '0'){?>
                           <th>Progres</th>
-                          <?php } ?>
+
                           <?php if($_SESSION['level_adminapt'] == '0' || $_SESSION['level_adminapt'] == '1'){?>
                           <th style="text-align: center;">Edit</th>
                           <?php } ?>
@@ -84,11 +83,11 @@ $query= new Database();
                             <td><?php if($row['rekomendasi'] != null) echo $row['rekomendasi']; else echo "-"; ?></td>
                             <td><?php echo $tanggal.'-'.$bulan.'-'.$tahun;?></td>
                             <td><?php echo $row['status'];?></td>
-                            <?php if($_SESSION['level_adminapt'] != '0'){?>
+
                             <td align="center">
                               <a class="koreksi" data-id="<?php echo $row['id_dokumen'];?>" no-dokumen="<?php echo $row['no_dokumen'];?>" href="#"><h3><i class="ti-comment-alt"></i></h3></a>
                             </td>
-                            <?php } ?>
+
                            <?php if($_SESSION['level_adminapt'] == '0' || $_SESSION['level_adminapt'] == '1'){?>
                             <td align="center">
                               <a class="editdok" data-id="<?php echo $row['id_dokumen'];?>" href="javascript:void(0)"><h3><li class="fa fa-edit"></li></h3></a>
@@ -112,7 +111,6 @@ $query= new Database();
             </div>
         </div>
     </div>
-
 </div>
 
 <script type="text/javascript">
