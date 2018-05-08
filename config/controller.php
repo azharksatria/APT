@@ -76,28 +76,54 @@ class Database
 		// {
 		// 	$where="SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ";
 		// }
-		$mysqli=$this->config->database();
-		$data   =$mysqli->query("SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ");
+		$mysqli  =$this->config->database();
+		$data    =$mysqli->query("SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ");
 		foreach ($data as $row)
 		{
-			$var[]=$row;
+			$var[] =$row;
 		}
 		return $var;
 	}
 
 	public function tampil_dokumen_where($a)
 	{
-		$mysqli=$this->config->database();
+		$mysqli =$this->config->database();
 		$data   =$mysqli->query("SELECT * FROM dokumen WHERE id_dokumen='$a' ");
-		$var=$data->fetch_array();
+		$var    =$data->fetch_array();
+		return $var;
+	}
+
+	public function tampil_notifikasi_where($a)
+	{
+		$mysqli =$this->config->database();
+		$data   =$mysqli->query("SELECT * FROM history WHERE id_history='$a' ");
+		$var    =$data->fetch_array();
+		return $var;
+	}
+
+	public function tampil_notifikasi_full()
+	{
+		$mysqli =$this->config->database();
+		$data   =$mysqli->query("SELECT * FROM history WHERE kriteria='".$_SESSION['kriteria']."' ORDER BY no_dokumen ASC ");
+		foreach ($data as $row) {
+			$var[]=$row;
+		}
+		return $var;
+	}
+
+	public function tampil_dokumen_progres($a)
+	{
+		$mysqli =$this->config->database();
+		$data   =$mysqli->query("SELECT * FROM history WHERE id_history='$a' ");
+		$var    =$data->fetch_array();
 		return $var;
 	}
 
 	public function koreksi_dokumen_where($a)
 	{
-		$mysqli=$this->config->database();
+		$mysqli =$this->config->database();
 		$data   =$mysqli->query("SELECT * FROM dokumen WHERE id_dokumen='$a' ");
-		$var=$data->fetch_array();
+		$var    =$data->fetch_array();
 		return $var;
 	}
 
@@ -114,7 +140,7 @@ class Database
 	public function notification($id)
 	{
 		$mysqli =$this->config->database();
-		$data   =$mysqli->query("SELECT * FROM history WHERE kriteria='$id' ");
+		$data   =$mysqli->query("SELECT * FROM history WHERE kriteria='$id' ORDER BY id_history DESC limit 5  ");
 	foreach ($data as $row) {
 		$var[]=$row;
 	}
@@ -260,17 +286,11 @@ public function update_dokumen($a,$b,$c,$d,$e,$f)
 	var_dump($var);
 }
 
-<<<<<<< HEAD
+
 public function update_status($a,$b,$c)
 {
 	$mysqli=$this->config->database();
 	$var=$mysqli->query("UPDATE dokumen SET status='$a',dokumen='$c',updated=NOW() WHERE id_dokumen='$b' ");
-=======
-public function update_status($a,$b)
-{
-	$mysqli=$this->config->database();
-	$var=$mysqli->query("UPDATE dokumen SET status='$a',updated=NOW() WHERE id_dokumen='$b' ");
->>>>>>> 634bac2572e59d457dfa948c4368ad7a89389e11
 	return $var;
 	var_dump($var);
 }

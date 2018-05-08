@@ -666,7 +666,5 @@ if($aksi=='user_login')
 
 if($aksi=='kriteria')
 	{
-
 		$_SESSION['kriteria']=$_POST['kriteria'];
-		header('location:../');
 	}

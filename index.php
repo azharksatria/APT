@@ -16,6 +16,7 @@ $query= new Database();
     <link href="css/style.css" rel="stylesheet">
     <link rel="shortcut icon" href="http://www.uma.ac.id/asset/images/favicon.png" />
     <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <style>
       #loader {
         transition: all 0.3s ease-in-out;
@@ -274,37 +275,35 @@ $query= new Database();
                   </li>
                   <?php
                       $id=$_SESSION['kriteria'];
-                      foreach ($query->notification($id) as $row) {?>
+                      foreach ($query->notification($id) as $row) {
+                        $data    =$row['date'];
+                        $pecah   =explode('-', $data);
+                        $tahun   =$pecah[0];
+                        $bulan   =$pecah[1];
+                        $tanggal =substr($pecah[2],0,-8);
+                  ?>
                   <li>
                     <ul class="ovY-a pos-r scrollable lis-n p-0 m-0 fsz-sm">
                       <li>
-                        <a href="" class='peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100'>
+                        <a  data-id="<?php echo $row['id_history'];?>" href="javascript:void(0)" class='peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100 notification'>
                           <div class="peer mR-15">
-                            <img class="w-3r bdrs-50p" src="https://randomuser.me/api/portraits/men/1.jpg" alt="">
+                            <i class="c-brown-500 ti-email"></i>
                           </div>
                           <div class="peer peer-greed">
                             <span>
-
                                 <span class="fw-500"><?php echo $row['nama'];?></span>
-
-                              <span class="c-grey-600">liked your <span class="text-dark">post</span>
-                              </span>
                             </span>
                             <p class="m-0">
-                              <small class="fsz-xs">5 mins ago</small>
+                              <small class="fsz-xs"><?php echo $tanggal.'/'.$bulan.'/'.$tahun;?></small>
                             </p>
                           </div>
                         </a>
                       </li>
-
                     </ul>
                   </li>
                   <?php } ?>
-                  <!-- <li class="pX-20 pY-15 ta-c bdT">
-                    <span>
-                      <a href="" class="c-grey-600 cH-blue fsz-sm td-n">View All Notifications <i class="ti-angle-right fsz-xs mL-10"></i></a>
-                    </span>
-                  </li> -->
+                  <li class="pX-20 pY-15 ta-c bdT">
+                    <span><a id="listnotif" href="views/list-notification.php" class="c-grey-600 cH-blue fsz-sm td-n">View All Notifications <i class="ti-angle-right fsz-xs mL-10"></i></a></span></li>
                 </ul>
               </li>
             <?php } ?>
@@ -386,6 +385,25 @@ $query= new Database();
           //$('#mainContent').replaceWith(span);
           $('#mainContent').load(this.href);
           //console.log(this.href);
+      });
+
+      $('#listnotif').on('click', function (evt) {
+          evt.preventDefault();
+          var link = evt.target,
+          span = $('<span>... processing ...</span>');
+          //$('#mainContent').replaceWith(span);
+          $('#mainContent').load(this.href);
+          //console.log(this.href);
+      });
+
+      $('.notification').on('click', function (evt) {
+          evt.preventDefault();
+          var getLink = $(this).attr('data-id');
+          var link = evt.target,
+          span = $('<span>... processing ...</span>');
+          //$('#mainContent').replaceWith(span);
+          $('#mainContent').load("views/view-notification.php?notif&id="+getLink);
+          console.log(getLink);
       });
 
       $('#dashboard').on('click', function (evt) {

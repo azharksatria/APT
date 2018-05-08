@@ -8,6 +8,8 @@ include'../root/notification.php';
 $query= new Database();
 
 ?>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <h5 class="c-grey-900 mT-10 mB-20"><i class="c-red-500 ti-files"></i> List Dokumen</h5>
 <div class="row gap-20 masonry pos-r">
     <div class="masonry-sizer col-md-6"></div>
@@ -21,7 +23,7 @@ $query= new Database();
                 <div class="layer bdT p-20 w-100">
                   <?php if($_SESSION['level_adminapt'] !='0'){?>
                       <form id="form" style="width:120px" method="post">
-                      <select class="form-control select2" name="kriteria" onchange="this.form.submit();">
+                      <select  class="form-control select2" name="kriteria" onchange="this.form.submit();">
                       <option>Pilih Kriteria</option>
                       <?php $y=9; for ($x=1; $x<=$y; $x++)
                       {
@@ -31,7 +33,7 @@ $query= new Database();
                       </form>
                       <br>
                       <?php } ?>
-                    <table id="example5" class="table table-bordered table-striped">
+                    <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                           <th style="width: 30px;">No.</th>
@@ -114,6 +116,7 @@ $query= new Database();
 </div>
 
 <script type="text/javascript">
+$(document).ready(function () {
       $('.editdok').on('click', function (evt) {
           evt.preventDefault();
           var getLink = $(this).attr('data-id');
@@ -137,13 +140,12 @@ $query= new Database();
         $("#form").on('change',(function(a) {
             a.preventDefault();
             $.ajax({
-                url: "root/proses.php?aksi=kriteria", // proses upload gambar
+                url: "root/proses.php?aksi=kriteria", // proses
                 type: "POST", // metode untuk menjalankan form
                 data:  new FormData(this),
                 contentType: false,
                 cache: false,
                 processData:false,
-
                 success: function(data){
                     console.log(data);
                     $('#mainContent').load('views/list-dokumen.php');
@@ -153,4 +155,9 @@ $query= new Database();
                 }
             });
         }));
+
+    $(document).ready(function(){
+        $('#example1').DataTable();
+    });
+  });
 </script>

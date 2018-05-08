@@ -68,7 +68,8 @@ if(isset($_GET['koreksi'])){
                                            <label for="inputPassword4">History</label>
                                               <p style="border: 1px solid #ced4da;border-radius:5px;padding:10px;">
                                              <?php $no='1'; foreach ($query->history($dokumen) as $data)
-                                             { echo $no++.'. '.$data['progres'].'<br>';}?>
+                                             { echo $no++.'. '.$data['progres'];
+                                               echo " <a target='_blank' href='views/view-progres.php?view&id=$data[id_history]'> Dokumen</a>"."<br>";}?> 
                                            </p>
                                            </div>
                                            <div class="form-group col-md-6">
