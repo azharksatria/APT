@@ -260,10 +260,17 @@ public function update_dokumen($a,$b,$c,$d,$e,$f)
 	var_dump($var);
 }
 
+<<<<<<< HEAD
 public function update_status($a,$b,$c)
 {
 	$mysqli=$this->config->database();
 	$var=$mysqli->query("UPDATE dokumen SET status='$a',dokumen='$c',updated=NOW() WHERE id_dokumen='$b' ");
+=======
+public function update_status($a,$b)
+{
+	$mysqli=$this->config->database();
+	$var=$mysqli->query("UPDATE dokumen SET status='$a',updated=NOW() WHERE id_dokumen='$b' ");
+>>>>>>> 634bac2572e59d457dfa948c4368ad7a89389e11
 	return $var;
 	var_dump($var);
 }
