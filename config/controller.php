@@ -140,10 +140,18 @@ class Database
 	public function notification($id)
 	{
 		$mysqli =$this->config->database();
-		$data   =$mysqli->query("SELECT * FROM history WHERE kriteria='$id' ORDER BY id_history DESC limit 5  ");
+		$data   =$mysqli->query("SELECT * FROM history WHERE kriteria='$id' AND baca='N' ORDER BY id_history DESC limit 5  ");
 	foreach ($data as $row) {
 		$var[]=$row;
 	}
+	return $var;
+	}
+
+	public function notification_row($id)
+	{
+		$mysqli =	$this->config->database();
+		$data   =	$mysqli->query("SELECT * FROM history WHERE kriteria='$id' AND baca='N' ORDER BY id_history DESC ");
+		$var		= $data->num_rows;
 	return $var;
 	}
 
@@ -274,7 +282,13 @@ public function update_dokumen_file($a,$b,$c,$d,$e,$f)
 	$var=$mysqli->query("UPDATE dokumen SET kode_kriteria='$b',no_dokumen='$c',nama_dokumen='$d',dokumen='$e',status='$f',
 		rekomendasi=NULL,updated=NOW() WHERE id_dokumen='$a' ");
 	return $var;
-	var_dump($var);
+}
+
+public function update_notifikasi($id)
+{
+	$mysqli=$this->config->database();
+	$var=$mysqli->query("UPDATE history SET baca='Y' WHERE id_history='$id' ");
+	return $var;
 }
 
 public function update_dokumen($a,$b,$c,$d,$e,$f)
@@ -283,7 +297,6 @@ public function update_dokumen($a,$b,$c,$d,$e,$f)
 	$var=$mysqli->query("UPDATE dokumen SET kode_kriteria='$b',no_dokumen='$c',nama_dokumen='$d',status='$e',
 		rekomendasi='$f',updated=NOW() WHERE id_dokumen='$a' ");
 	return $var;
-	var_dump($var);
 }
 
 
@@ -292,7 +305,6 @@ public function update_status($a,$b,$c)
 	$mysqli=$this->config->database();
 	$var=$mysqli->query("UPDATE dokumen SET status='$a',dokumen='$c',updated=NOW() WHERE id_dokumen='$b' ");
 	return $var;
-	var_dump($var);
 }
 	// public function update_slider($id,$photo)
 	// {

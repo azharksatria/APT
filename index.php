@@ -263,7 +263,9 @@ $query= new Database();
             <ul class="nav-right">
               <?php if($_SESSION['level_adminapt']==0){?>
               <li class="notifications dropdown">
-                <span class="counter bgc-red">3</span>
+                <span class="counter bgc-red">
+                  <div class="load-notification" ></div>
+                </span>
                 <a href="" class="dropdown-toggle no-after" data-toggle="dropdown">
                   <i class="ti-bell"></i>
                 </a>
@@ -273,35 +275,7 @@ $query= new Database();
                     <i class="ti-bell pR-10"></i>
                     <span class="fsz-sm fw-600 c-grey-900">Notifications</span>
                   </li>
-                  <?php
-                      $id=$_SESSION['kriteria'];
-                      foreach ($query->notification($id) as $row) {
-                        $data    =$row['date'];
-                        $pecah   =explode('-', $data);
-                        $tahun   =$pecah[0];
-                        $bulan   =$pecah[1];
-                        $tanggal =substr($pecah[2],0,-8);
-                  ?>
-                  <li>
-                    <ul class="ovY-a pos-r scrollable lis-n p-0 m-0 fsz-sm">
-                      <li>
-                        <a  data-id="<?php echo $row['id_history'];?>" href="javascript:void(0)" class='peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100 notification'>
-                          <div class="peer mR-15">
-                            <i class="c-brown-500 ti-email"></i>
-                          </div>
-                          <div class="peer peer-greed">
-                            <span>
-                                <span class="fw-500"><?php echo $row['nama'];?></span>
-                            </span>
-                            <p class="m-0">
-                              <small class="fsz-xs"><?php echo $tanggal.'/'.$bulan.'/'.$tahun;?></small>
-                            </p>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <?php } ?>
+              <div class="warning-notif"></div>
                   <li class="pX-20 pY-15 ta-c bdT">
                     <span><a id="listnotif" href="views/list-notification.php" class="c-grey-600 cH-blue fsz-sm td-n">View All Notifications <i class="ti-angle-right fsz-xs mL-10"></i></a></span></li>
                 </ul>
@@ -348,6 +322,20 @@ $query= new Database();
             <?php include'views/dashboard.php';?>
           </div>
         </main>
+<!--=====================================   -->
+        <!-- <table style="width:40%; text-align:left">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>NAMA</th>
+				<th>ALAMAT</th>
+			</tr>
+			</thead>
+			<tbody id="load-notification">  // parameter untuk memuat data tabel
+
+			</tbody>
+		</table> -->
+  <!-- ==================================  -->
 
         <!-- ### $App Screen Footer ### -->
         <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
@@ -365,10 +353,11 @@ $query= new Database();
     <script type="text/javascript">
       $(document).ready( function (){
         $('#dataTable').DataTable();
-      });
-    </script>
+        $('.load-notification').load("root/getnotif.php");
+        $('.warning-notif').load("views/warning-notif.php");
 
-    <script type="text/javascript">
+      });
+
       $('#inputdokumen').on('click', function (evt) {
           evt.preventDefault();
           var link = evt.target,
@@ -396,16 +385,6 @@ $query= new Database();
           //console.log(this.href);
       });
 
-      $('.notification').on('click', function (evt) {
-          evt.preventDefault();
-          var getLink = $(this).attr('data-id');
-          var link = evt.target,
-          span = $('<span>... processing ...</span>');
-          //$('#mainContent').replaceWith(span);
-          $('#mainContent').load("views/view-notification.php?notif&id="+getLink);
-          console.log(getLink);
-      });
-
       $('#dashboard').on('click', function (evt) {
           evt.preventDefault();
           var link = evt.target,
@@ -414,6 +393,8 @@ $query= new Database();
           $('#mainContent').load(this.href);
           //console.log(this.href);
       });
+
+
     </script>
   </body>
 </html>

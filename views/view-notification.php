@@ -6,6 +6,7 @@ $query= new Database();
 
 if(isset($_GET['notif'])){
   $id=$_GET['id'];
+  $query->update_notifikasi($id);
   $row=$query->tampil_notifikasi_where($id);
   $data=$row['date'];
   $pecah   =explode('-', $data);

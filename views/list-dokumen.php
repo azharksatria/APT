@@ -137,7 +137,7 @@ $(document).ready(function () {
           console.log(getLink);
       });
               //formsubmit
-        $("#form").on('change',(function(a) {
+        $("#form").change(function(a) {
             a.preventDefault();
             $.ajax({
                 url: "root/proses.php?aksi=kriteria", // proses
@@ -150,14 +150,14 @@ $(document).ready(function () {
                     console.log(data);
                     $('#mainContent').load('views/list-dokumen.php');
                 },
-                error: function(data){
+                error: function(data)
+                {
                   console.log(data.responseText);
                 }
             });
-        }));
+        });
 
-    $(document).ready(function(){
         $('#example1').DataTable();
-    });
+
   });
 </script>

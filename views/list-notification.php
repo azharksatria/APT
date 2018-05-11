@@ -24,7 +24,7 @@ $query= new Database();
                   <?php if($_SESSION['level_adminapt'] !='0'){?>
 
                       <?php } ?>
-                    <table id="example2" class="table table-bordered table-striped">
+                    <table id="example3" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                           <th style="width: 30px;">No.</th>
@@ -61,6 +61,7 @@ $query= new Database();
 </div>
 
 <script type="text/javascript">
+$(document).ready(function () {
       $('.editdok').on('click', function (evt) {
           evt.preventDefault();
           var getLink = $(this).attr('data-id');
@@ -70,10 +71,6 @@ $query= new Database();
           $('#mainContent').load("views/edit-dokumen.php?edit&id="+getLink);
           console.log(getLink);
       });
-
-</script>
-<script>
-    $(document).ready(function(){
-        $('#example2').DataTable();
-    });
+        $('#example3').DataTable();
+  });
 </script>
