@@ -23,7 +23,8 @@ $query= new Database();
                 <div class="layer bdT p-20 w-100">
                   <?php if($_SESSION['level_adminapt'] !='0'){?>
                       <form id="form" style="width:120px" method="post">
-                      <select  class="form-control select2" name="kriteria" onchange="this.form.submit();">
+                      <!--<select  class="form-control select2" name="kriteria" onchange="this.form.submit();">-->
+                      <select  class="form-control select2" name="kriteria">
                       <option>Pilih Kriteria</option>
                       <?php $y=9; for ($x=1; $x<=$y; $x++)
                       {
@@ -100,7 +101,7 @@ $query= new Database();
                             {
                             ?>
                             <td align="center">
-                              <a class="deletedok" data-id="<?php echo $row['id_dokumen'];?>" href="javascript:void(0)" onclick="return confirm('Yakin Hapus Dokumen ?')"><h3><li class="fa fa-trash"></li></h3></a>
+                              <a class="deletedok" data-id="<?php echo $row['id_dokumen'];?>" href="javascript:void(0)"><h3><li class="fa fa-trash"></li></h3></a>
                             </td>
                             <?php
                             }
@@ -126,6 +127,35 @@ $(document).ready(function () {
           $('#mainContent').load("views/edit-dokumen.php?edit&id="+getLink);
           console.log(getLink);
       });
+      
+      $('.deletedok').on('click', function (evt) {
+          var confirmation = confirm("Yakin hapus dokumen ?");
+          evt.preventDefault();
+          var getLink = $(this).attr('data-id');
+          var link = evt.target,
+          span = $('<span>... processing ...</span>');
+          //$('#mainContent').replaceWith(span);
+          if (confirmation) {
+              $.ajax({
+                    url: "root/proses.php?aksi=delete_dokumen&id="+getLink, // proses
+                    type: "GET", // metode untuk menjalankan form
+                    data:  new FormData(this),
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(data){
+                        console.log(data);
+                        $('#mainContent').load('views/list-dokumen.php');
+                        swal("Sukses","Dokumen Berhasil di Hapus","success");
+                    },
+                    error: function(data)
+                    {
+                      console.log(data.responseText);
+                    }
+                });
+          }    
+      });
+      
       $('.koreksi').on('click', function (evt) {
           evt.preventDefault();
           var getLink = $(this).attr('data-id');

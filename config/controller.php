@@ -25,17 +25,17 @@ class Database
 	public function koreksi_dokumen_file($a,$b,$c,$d,$e,$f)
 	{
 		$mysqli=$this->config->database();
-		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b','$c','$d','$e','$f',NOW())");
+		$var=$mysqli->query("INSERT INTO history (kriteria,no_dokumen,perbaikan,file,progres,nama,date)  VALUES('$a','$b','$c','$d','$e','$f',NOW() )");
 		return $var;
-		var_dump($var);
+		//var_dump($var);
 	}
 
 	public function koreksi_dokumen($a,$b,$c,$d,$e)
 	{
 		$mysqli=$this->config->database();
-		$var=$mysqli->query("INSERT INTO history  VALUES(NULL,'$a','$b','$c',NULL,'$d','$e',NOW())");
+		$var=$mysqli->query("INSERT INTO history (kriteria,no_dokumen,perbaikan,progres,nama,date) VALUES('$a','$b','$c','$d','$e',NOW() )");
 		return $var;
-		var_dump($var);
+		//var_dump($var);
 	}
 
 	public function kriteria($no)
@@ -77,7 +77,7 @@ class Database
 		// 	$where="SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ";
 		// }
 		$mysqli  =$this->config->database();
-		$data    =$mysqli->query("SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ");
+		$data    =$mysqli->query("SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ORDER BY no_dokumen desc");
 		foreach ($data as $row)
 		{
 			$var[] =$row;

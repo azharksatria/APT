@@ -73,7 +73,8 @@ if($aksi=='koreksi_dokumen')
 			$_POST['progres'],
 			$_POST['nama']
 			);
-			// var_dump($var);
+			 //var_dump($var);
+			 
 				if($var)
 				{
 					$_SESSION['dokumen']='Koreksi';
@@ -95,7 +96,7 @@ if($aksi=='koreksi_dokumen')
 					$_POST['progres'],
 					$_POST['nama']
 				);
-				// var_dump($var);
+				 var_dump($var);
 					if($var)
 					{
 						$_SESSION['dokumen']='Koreksi';
