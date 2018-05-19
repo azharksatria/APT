@@ -77,7 +77,7 @@ class Database
 		// 	$where="SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ";
 		// }
 		$mysqli  =$this->config->database();
-		$data    =$mysqli->query("SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ORDER BY no_dokumen desc");
+		$data    =$mysqli->query("SELECT * FROM dokumen WHERE kode_kriteria='".$_SESSION['kriteria']."' ORDER BY no_dokumen ASC");
 		foreach ($data as $row)
 		{
 			$var[] =$row;

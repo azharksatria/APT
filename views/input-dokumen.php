@@ -40,7 +40,18 @@ $query= new Database();
                                            </div>
                                            <div class="form-group col-md-6">
                                            <label for="inputPassword4">Progres</label>
-                                           <input type="number" max="100" class="form-control" id="progres" name="progres" required>
+                                           <input type="number" max="100" class="form-control" id="progres" name="progres" >
+                                           </div>
+
+                                           <div class="form-group col-md-6">
+                                           <label for="inputPassword4">Rekomendasi</label>
+                                           <textarea class="form-control" id="rekomendasitxt" name="rekomendasi" style="margin-top: 0px; margin-bottom: 0px; height: 66px;"></textarea>
+                                           </div>
+
+                                           <div class="form-group col-md-6">
+                                           <label for="inputPassword4">Upload Dokumen</label>
+                                           <!-- <input type="file" id="berkastxt" accept=".doc,.pdf,.docx" class="form-control" name="file"> -->
+                                           <input type="file" id="berkastxt"  class="form-control" name="file">
                                            </div>
                                            </div>
 
@@ -48,7 +59,7 @@ $query= new Database();
                                            <div class="form-row">
                                            <div class="form-group col-md-4">
                                            <label for="inputAddress2">Status</label>
-                                           <div class="form-check" id="check1"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="status" value="AL" required> Ada dan Lengkap</label></div>
+                                           <div class="form-check" id="check1"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="status" value="AL" > Ada dan Lengkap</label></div>
 
                                            <div class="form-check" id="check2"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="status" value="ATL"> Ada Tidak Lengkap</label></div>
 
@@ -56,7 +67,7 @@ $query= new Database();
 
                                            <div class="form-check" id="check4"><label class="form-check-label"><input class="form-check-input" type="radio" name="status" id="status" value="BA"> Belum Ada</label></div>
                                            </div>
-                                           <div class="form-group col-md-8">
+                                           <!-- <div class="form-group col-md-8">
                                            <div id="rekomendasi">
                                            <label for="inputPassword4">Rekomendasi</label>
                                            <textarea class="form-control" id="rekomendasitxt" name="rekomendasi" style="margin-top: 0px; margin-bottom: 0px; height: 66px;"></textarea>
@@ -65,7 +76,7 @@ $query= new Database();
                                            <label for="inputPassword4">Upload Dokumen</label>
                                            <input type="file" id="berkastxt" accept=".doc,.pdf,.docx" class="form-control" name="file">
                                            </div>
-                                           </div>
+                                           </div> -->
                                            </div>
                                            <button type="submit" class="btn btn-primary">SIMPAN</button>
                                            <button type="button" id="btnreset" class="btn btn-danger">RESET</button>
@@ -80,34 +91,34 @@ $query= new Database();
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#rekomendasi").hide();
-        $("#berkas").hide();
-
-        $('#check1').on('click', function () {
-            $("#rekomendasi").hide();
-            $("#berkas").show();
-            $("#berkastxt").attr("required", "required");
-            $("#rekomendasitxt").removeAttr("required");
-            $("#rekomendasitxt").val("");
-        });
-        $('#check2').on('click', function () {
-            $("#rekomendasi").show();
-            $("#berkas").hide();
-            $("#rekomendasitxt").attr("required", "required");
-            $("#berkastxt").removeAttr("required");
-        });
-        $('#check3').on('click', function () {
-            $("#rekomendasi").show();
-            $("#berkas").hide();
-            $("#rekomendasitxt").attr("required", "required");
-            $("#berkastxt").removeAttr("required");
-        });
-        $('#check4').on('click', function () {
-            $("#rekomendasi").show();
-            $("#berkas").hide();
-            $("#rekomendasitxt").attr("required", "required");
-            $("#berkastxt").removeAttr("required");
-        });
+        // $("#rekomendasi").hide();
+        // $("#berkas").hide();
+        //
+        // $('#check1').on('click', function () {
+        //     $("#rekomendasi").hide();
+        //     $("#berkas").show();
+        //     $("#berkastxt").attr("required", "required");
+        //     $("#rekomendasitxt").removeAttr("required");
+        //     $("#rekomendasitxt").val("");
+        // });
+        // $('#check2').on('click', function () {
+        //     $("#rekomendasi").show();
+        //     $("#berkas").hide();
+        //     $("#rekomendasitxt").attr("required", "required");
+        //     $("#berkastxt").removeAttr("required");
+        // });
+        // $('#check3').on('click', function () {
+        //     $("#rekomendasi").show();
+        //     $("#berkas").hide();
+        //     $("#rekomendasitxt").attr("required", "required");
+        //     $("#berkastxt").removeAttr("required");
+        // });
+        // $('#check4').on('click', function () {
+        //     $("#rekomendasi").show();
+        //     $("#berkas").hide();
+        //     $("#rekomendasitxt").attr("required", "required");
+        //     $("#berkastxt").removeAttr("required");
+        // });
 
         //btnreset
         $('#btnreset').on('click', function () {

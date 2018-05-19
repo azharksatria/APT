@@ -66,11 +66,40 @@ if(isset($_GET['koreksi'])){
                                            </div>
                                            <div class="form-group col-md-6">
                                            <label for="inputPassword4">History</label>
-                                              <p style="border: 1px solid #ced4da;border-radius:5px;padding:10px;">
+                                              <!-- <p style="border: 1px solid #ced4da;border-radius:5px;padding:10px;">
                                              <?php $no='1'; foreach ($query->history($dokumen) as $data)
-                                             { echo $no++.'. '.$data['progres'];
-                                               echo " <a target='_blank' href='views/view-progres.php?view&id=$data[id_history]'> Dokumen</a>"."<br>";}?> 
-                                           </p>
+                                             { echo $no++.'. '.$data['progres'].'%';
+                                               echo " "." <a target='_blank' href='views/view-progres.php?view&id=$data[id_history]'> Dokumen</a>"."<br>";}?>
+                                           </p> -->
+
+                                           <table id="example6" class="table table-bordered table-striped">
+                                               <thead>
+                                                 <tr>
+                                                   <td>No</no>
+                                                   <td>Persentase</td>
+                                                   <td>Dokumen</td>
+                                                   <td>Pengoreksi</td>
+                                                   <td>Tanggal</td>
+                                                 </tr>
+                                               </thead>
+                                               <tbody>
+                                                 <?php $no='1'; foreach ($query->history($dokumen) as $data)
+                                                 {
+                                                 $date=$data['date'];
+                                                 $tglindo   =explode('-', $date);
+                                                 $tahunid   =$tglindo[0];
+                                                 $bulanid   =$tglindo[1];
+                                                 $tanggalid =substr($tglindo[2],0,-8); ?>
+                                                 <tr>
+                                                   <td><?php echo $no++;?></td>
+                                                   <td><?php echo $data['progres'].'%';?></td>
+                                                   <td><?php echo " "." <a target='_blank' href='views/view-progres.php?view&id=$data[id_history]'> Dokumen</a>";?></td>
+                                                   <td><?php echo $data['nama'];?></td>
+                                                   <td><?php echo $tanggalid.'-'.$bulanid.'-'.$tahunid;?></td>
+                                                 </tr>
+                                               <?php } ?>
+                                               </tbody>
+                                             </table>
                                            </div>
                                            <div class="form-group col-md-6">
                                            <label for="inputPassword4">Progres</label>

@@ -4,11 +4,16 @@ session_start();
 // 	header('location:/');
 // }
 
-class Koneksi 
+class Koneksi
 {
-	var $host     ="apt.uma.ac.id";
-	var $username ="aptumaac_user";
-	var $password ="passwordapt";
+	// var $host     ="apt.uma.ac.id";
+	// var $username ="aptumaac_user";
+	// var $password ="passwordapt";
+	// var $db       ="aptumaac_apt";
+
+	var $host     ="localhost";
+	var $username ="root";
+	var $password ="password";
 	var $db       ="aptumaac_apt";
 
 	public function  database()
