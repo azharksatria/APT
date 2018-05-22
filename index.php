@@ -292,9 +292,9 @@ $query= new Database();
                 </a>
                 <ul class="dropdown-menu fsz-sm">
                   <li>
-                    <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                    <a id="gantipassword" href="views/gantipassword.php" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                       <i class="ti-settings mR-10"></i>
-                      <span>Setting</span>
+                      <span>Ganti Password</span>
                     </a>
                   </li>
                   <li>
@@ -386,6 +386,15 @@ $query= new Database();
       });
 
       $('#dashboard').on('click', function (evt) {
+          evt.preventDefault();
+          var link = evt.target,
+          span = $('<span>... processing ...</span>');
+          //$('#mainContent').replaceWith(span);
+          $('#mainContent').load(this.href);
+          //console.log(this.href);
+      });
+
+      $('#gantipassword').on('click', function (evt) {
           evt.preventDefault();
           var link = evt.target,
           span = $('<span>... processing ...</span>');

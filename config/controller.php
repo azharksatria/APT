@@ -299,11 +299,19 @@ public function update_dokumen($a,$b,$c,$d,$e,$f)
 	return $var;
 }
 
-
 public function update_status($a,$b,$c)
 {
 	$mysqli=$this->config->database();
 	$var=$mysqli->query("UPDATE dokumen SET status='$a',dokumen='$c',updated=NOW() WHERE id_dokumen='$b' ");
+	return $var;
+}
+
+public function gantipassword($a)
+{
+	$password=md5($a);
+	$id=$_SESSION['idadmin'];
+	$mysqli=$this->config->database();
+	$var=$mysqli->query("UPDATE admin SET password='$password' WHERE id='$id' ");
 	return $var;
 }
 	// public function update_slider($id,$photo)

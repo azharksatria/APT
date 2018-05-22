@@ -74,7 +74,7 @@ if($aksi=='koreksi_dokumen')
 			$_POST['nama']
 			);
 			 //var_dump($var);
-			 
+
 				if($var)
 				{
 					$_SESSION['dokumen']='Koreksi';
@@ -251,25 +251,25 @@ if($aksi=='update_dokumen')
 					}
 			}
 }
-// if($aksi=='update_admin')
-// {
-// 		$var=$query->update_admin(
-// 			$_POST['id'],
-// 			$_POST['nama'],
-// 			$_POST['username']
-// 			);
-//
-// 			if($var){
-// 				$_SESSION['input_admin']='active';
-// 				$a=$_SESSION['input_admin'];
-// 				//var_dump($a);
-// 				header('location:../');
-// 			}else{
-// 				echo '<script>swal("Gagal","Data Gagal di Update!","error")</script>';
-// 				header('location:../');
-// 				}
-// }
-//
+
+
+if($aksi=='gantipassword')
+{
+		$var=$query->gantipassword(
+			$_POST['password_baru']
+			);
+
+			// if($var){
+			// 	$_SESSION['input_admin']='active';
+			// 	$a=$_SESSION['input_admin'];
+				// var_dump($var);
+			// 	header('location:../');
+			// }else{
+			// 	echo '<script>swal("Gagal","Data Gagal di Update!","error")</script>';
+			// 	header('location:../');
+			// 	}
+}
+
 // if($aksi=='edit_admin')
 // 	{
 // 		$_SESSION['id_admin']=$_GET['id'];
